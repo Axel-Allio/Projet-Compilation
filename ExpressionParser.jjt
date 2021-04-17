@@ -53,7 +53,7 @@ ASTstart start() #start:{}
 void statement() #Statement:
 {}
 {
-	identifier()"="expression()";"
+	identifier()"=" (expression() | boolExpression())";"
 }
 
 void identifier() :
@@ -113,4 +113,37 @@ void numberExpression() :
 	{
 	|"(" expression() ")";
 	}#Exp
+}
+
+void boolExpression() :
+{}
+{
+	  equalBoolExpression()
+	|diffBoolExpression()
+	| greaterBoolExpression()
+	| lessBoolExpression()
+}
+
+void equalBoolExpression() :
+{}
+{
+	expression() "=" expression() 
+}
+
+void diffBoolExpression() :
+{}
+{
+	expression() "<>" expression() 
+}
+
+void expregreaterBoolExpressionssionGreat() :
+{}
+{
+	expression() ">" expression() 
+}
+
+void lessBoolExpression() :
+{}
+{
+	expression() "<" expression() 
 }
