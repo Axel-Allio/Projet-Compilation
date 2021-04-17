@@ -36,7 +36,8 @@ TOKEN:
 	|	<MULTIPLY: "*">
 	|	<PLUS: "+">
 	|	<MINUS: "-">
-	|	<BOOL: "true" | "false">
+	|	<BOOL: "BOOL">
+	|	<INT: "INT">
 	|	<EQUAL: "=">
 	|	<DIFF: "<>">
 	|	<LESS: "<">
@@ -53,7 +54,8 @@ ASTstart start() #start:{}
 void statement() #Statement:
 {}
 {
-	identifier()"=" (expression() | boolExpression())";"
+	<BOOL> identifier()"=" boolExpression()";"
+	|<INT> identifier()"=" expression()";"
 }
 
 void identifier() :
@@ -101,7 +103,8 @@ void numberExpression() :
 }
 {
 	"(" expression() ")"
-	<NUMBER>
+
+	| <NUMBER>
 	{ 
 		jjtThis.data.put("value",new Integer(Integer.parseInt(token.image)));
 		
@@ -115,32 +118,9 @@ void numberExpression() :
 void boolExpression():
 {}
 {
-	  equalBoolExpression()#EqualExpr() 
-	|diffBoolExpression()#DiffExpr() 
-	| greaterBoolExpression()#GreatExpr() 
-	| lessBoolExpression()#LessExpr() 
-}
-
-void equalBoolExpression() :
-{}
-{
-	expression() "=" expression() 
-}
-
-void diffBoolExpression() :
-{}
-{
-	expression() "<>" expression() 
-}
-
-void greaterBoolExpression() :
-{}
-{
-	expression() ">" expression() 
-}
-
-void lessBoolExpression() :
-{}
-{
-	expression() "<" expression() 
+	expression()
+	(<EQUAL> expression()#EqualExpr(2) 
+	|<DIFF> expression()#DiffExpr(2) 
+	|<GREATER> expression()#GreatExpr(2) 
+	|<LESS> expression()#LessExpr(2) )
 }
