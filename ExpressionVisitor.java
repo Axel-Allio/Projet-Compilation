@@ -83,6 +83,38 @@ public class ExpressionVisitor implements ExpressionParserVisitor{
 		return null;
 	}
 	
+	public Object visit(ASTEqualExpr node, Object data) {
+		node.childrenAccept(this,data);
+		Integer arg1=pop();
+		Integer arg2=pop();
+		stack.addFirst(new Boolean(arg2.intValue()==arg1.intValue()));
+		return null;
+	}
+
+	public Object visit(ASTDiffExpr node, Object data) {
+		node.childrenAccept(this,data);
+		Integer arg1=pop();
+		Integer arg2=pop();
+		stack.addFirst(new Boolean(arg2.intValue()!=arg1.intValue()));
+		return null;
+	}
+
+	public Object visit(ASTGreatExpr node, Object data) {
+		node.childrenAccept(this,data);
+		Integer arg1=pop();
+		Integer arg2=pop();
+		stack.addFirst(new Boolean(arg2.intValue()>arg1.intValue()));
+		return null;
+	}
+
+	public Object visit(ASTLessExpr node, Object data) {
+		node.childrenAccept(this,data);
+		Integer arg1=pop();
+		Integer arg2=pop();
+		stack.addFirst(new Boolean(arg2.intValue()<arg1.intValue()));
+		return null;
+	}
+
 	private Integer pop()
 	{
 		return (Integer)stack.removeFirst();

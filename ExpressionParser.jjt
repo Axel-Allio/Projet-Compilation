@@ -118,7 +118,7 @@ void numberExpression() :
 void boolExpression() :
 {}
 {
-	  equalBoolExpression()
+	  equalBoolExpression() 
 	|diffBoolExpression()
 	| greaterBoolExpression()
 	| lessBoolExpression()
