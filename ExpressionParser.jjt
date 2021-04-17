@@ -36,6 +36,12 @@ TOKEN:
 	|	<MULTIPLY: "*">
 	|	<PLUS: "+">
 	|	<MINUS: "-">
+	|	<BOOL: "true" | "false">
+	|	<EQUAL: "=">
+	|	<DIFF: "<>">
+	|	<LESS: "<">
+	|	<GREATER: ">">
+
 }
 
 ASTstart start() #start:{}
@@ -94,6 +100,7 @@ void numberExpression() :
 {
 }
 {
+	|"(" expression() ")"
 	<NUMBER>
 	{ 
 		jjtThis.data.put("value",new Integer(Integer.parseInt(token.image)));
