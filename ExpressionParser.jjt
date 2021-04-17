@@ -100,7 +100,7 @@ void numberExpression() :
 {
 }
 {
-	|"(" expression() ")"
+	"(" expression() ")"
 	<NUMBER>
 	{ 
 		jjtThis.data.put("value",new Integer(Integer.parseInt(token.image)));
@@ -110,18 +110,15 @@ void numberExpression() :
 	{
 		jjtThis.data.put("name",token.image);
 	}#VariableValue
-	{
-	|"(" expression() ")";
-	}#Exp
 }
 
-void boolExpression() :
+void boolExpression():
 {}
 {
-	  equalBoolExpression() 
-	|diffBoolExpression()
-	| greaterBoolExpression()
-	| lessBoolExpression()
+	  equalBoolExpression()#EqualExpr() 
+	|diffBoolExpression()#DiffExpr() 
+	| greaterBoolExpression()#GreatExpr() 
+	| lessBoolExpression()#LessExpr() 
 }
 
 void equalBoolExpression() :
@@ -136,7 +133,7 @@ void diffBoolExpression() :
 	expression() "<>" expression() 
 }
 
-void expregreaterBoolExpressionssionGreat() :
+void greaterBoolExpression() :
 {}
 {
 	expression() ">" expression() 

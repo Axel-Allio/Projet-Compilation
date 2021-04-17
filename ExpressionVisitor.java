@@ -82,6 +82,7 @@ public class ExpressionVisitor implements ExpressionParserVisitor{
 		stack.addFirst(symbolTable.get(var));
 		return null;
 	}
+
 	
 	public Object visit(ASTEqualExpr node, Object data) {
 		node.childrenAccept(this,data);
