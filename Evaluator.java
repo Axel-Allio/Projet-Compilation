@@ -16,11 +16,26 @@ public class Evaluator
     }
 
     // CALCUL
-    void visit(Neg v);
-    void visit(Add v);
-    void visit(Sub v);
-    void visit(Mul v);
-    void visit(Div v);
+    void visit(Neg v){
+        result = -v.exp;
+        resultString = result.toString;
+    }
+    void visit(Add v){
+        result = v.lhs + v.rhs;
+        resultString = result.toString;
+    }
+    void visit(Sub v){
+        result = v.lhs - v.rhs;
+        resultString = result.toString;
+    }
+    void visit(Mul v){
+        result = v.lhs * v.rhs;
+        resultString = result.toString;
+    }
+    void visit(Div v){
+        result = v.lhs / v.rhs;
+        resultString = result.toString;
+    }
 
     // COMPARISON
     void visit(Equal v){
