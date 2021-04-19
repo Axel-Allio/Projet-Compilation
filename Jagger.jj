@@ -51,7 +51,7 @@ void mainloop():
 { Expression a; }
 {
     (
-      a=ITE() <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
+      (a=print()|a=comparison()) <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
     )*
     <EOF>
 }
@@ -143,6 +143,6 @@ Expression factor():
 Expression ITE():
 {Expression a,b,c;}
 {
-    (<IF> a=comparison() <THEN> b=expression() <ELSE> c=expression() { a = new IfThenElse(a,b,c);})+
+    (<IF> a=comparison() <THEN> b=comparison() <ELSE> c=comparison() { a = new IfThenElse(a,b,c);})+
     {return a;}
 }
