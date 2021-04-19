@@ -6,9 +6,9 @@ import java.util.HashMap;
 public class Jagger implements JaggerConstants {
     static Scope parent = null;
 
-    public static void main(String args[]) throws ParseException
+    public static void main(String args[]) throws Exception
     {
-        Jagger parser = new Jagger(System.in);
+        Jagger parser = new Jagger(new java.io.FileReader(args[0]));
         parser.mainloop();
     }
 
@@ -41,7 +41,19 @@ public class Jagger implements JaggerConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      jj_consume_token(EOL);
+      label_2:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case EOL:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[2] = jj_gen;
+          break label_2;
+        }
+        jj_consume_token(EOL);
+      }
 new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
     }
     jj_consume_token(0);
@@ -67,7 +79,7 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
       break;
       }
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[3] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -78,7 +90,7 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
 //  scope -> let (declaration)* in instruction (, instruction)* end
   static final public Expression scope() throws ParseException {Expression a; Scope s = new Scope(parent); parent=s;
     jj_consume_token(LET);
-    label_2:
+    label_3:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case VAR:{
@@ -86,15 +98,15 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
         break;
         }
       default:
-        jj_la1[3] = jj_gen;
-        break label_2;
+        jj_la1[4] = jj_gen;
+        break label_3;
       }
       declaration();
     }
     jj_consume_token(IN);
     a = statement();
 s.addInstruction(a);
-    label_3:
+    label_4:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case COMMA:{
@@ -102,8 +114,8 @@ s.addInstruction(a);
         break;
         }
       default:
-        jj_la1[4] = jj_gen;
-        break label_3;
+        jj_la1[5] = jj_gen;
+        break label_4;
       }
       jj_consume_token(COMMA);
       a = statement();
@@ -183,14 +195,14 @@ a = new InfEqual(a,b);
         break;
         }
       default:
-        jj_la1[5] = jj_gen;
+        jj_la1[6] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
       }
     default:
-      jj_la1[6] = jj_gen;
+      jj_la1[7] = jj_gen;
       ;
     }
 {if ("" != null) return a;}
@@ -218,14 +230,14 @@ a=new Sub(a,b);
         break;
         }
       default:
-        jj_la1[7] = jj_gen;
+        jj_la1[8] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
       }
     default:
-      jj_la1[8] = jj_gen;
+      jj_la1[9] = jj_gen;
       ;
     }
 {if ("" != null) return a;}
@@ -236,7 +248,7 @@ a=new Sub(a,b);
 // T -> U ('*'U | '/'U)*
   static final public Expression term() throws ParseException {Expression a,b;
     a = unary();
-    label_4:
+    label_5:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case 29:
@@ -245,8 +257,8 @@ a=new Sub(a,b);
         break;
         }
       default:
-        jj_la1[9] = jj_gen;
-        break label_4;
+        jj_la1[10] = jj_gen;
+        break label_5;
       }
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case 29:{
@@ -262,7 +274,7 @@ a=new Div(a,b);
         break;
         }
       default:
-        jj_la1[10] = jj_gen;
+        jj_la1[11] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -294,14 +306,14 @@ a=new Neg(a);
         break;
         }
       default:
-        jj_la1[11] = jj_gen;
+        jj_la1[12] = jj_gen;
         ;
       }
       a = prefactor();
       break;
       }
     default:
-      jj_la1[12] = jj_gen;
+      jj_la1[13] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -330,7 +342,7 @@ a = new Char(t.toString());
       break;
       }
     default:
-      jj_la1[13] = jj_gen;
+      jj_la1[14] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -339,7 +351,7 @@ a = new Char(t.toString());
   }
 
   static final public Expression prefactor() throws ParseException {Expression a,b,c;
-    label_5:
+    label_6:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case IF:{
@@ -363,7 +375,7 @@ a = new Char(t.toString());
           break;
           }
         default:
-          jj_la1[14] = jj_gen;
+          jj_la1[15] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -385,7 +397,7 @@ a = new Char(t.toString());
           break;
           }
         default:
-          jj_la1[15] = jj_gen;
+          jj_la1[16] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -407,7 +419,7 @@ a = new IfThenElse(a,b,c);
         break;
         }
       default:
-        jj_la1[16] = jj_gen;
+        jj_la1[17] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -422,8 +434,8 @@ a = new IfThenElse(a,b,c);
         break;
         }
       default:
-        jj_la1[17] = jj_gen;
-        break label_5;
+        jj_la1[18] = jj_gen;
+        break label_6;
       }
     }
 {if ("" != null) return a;}
@@ -446,13 +458,13 @@ a = new IfThenElse(a,b,c);
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[18];
+  static final private int[] jj_la1 = new int[19];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x410,0x410,0x181604b0,0x4000,0x2000,0x7e00000,0x7e00000,0x18000000,0x18000000,0x60000000,0x60000000,0x8000000,0x181604a0,0x60020,0x181604b0,0x181604b0,0x1604a0,0x1604a0,};
+      jj_la1_0 = new int[] {0x410,0x410,0x10000,0x181604b0,0x4000,0x2000,0x7e00000,0x7e00000,0x18000000,0x18000000,0x60000000,0x60000000,0x8000000,0x181604a0,0x60020,0x181604b0,0x181604b0,0x1604a0,0x1604a0,};
    }
 
   /** Constructor with InputStream. */
@@ -473,7 +485,7 @@ a = new IfThenElse(a,b,c);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -487,7 +499,7 @@ a = new IfThenElse(a,b,c);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -504,7 +516,7 @@ a = new IfThenElse(a,b,c);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -514,7 +526,7 @@ a = new IfThenElse(a,b,c);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -530,7 +542,7 @@ a = new IfThenElse(a,b,c);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -539,7 +551,7 @@ a = new IfThenElse(a,b,c);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -595,7 +607,7 @@ a = new IfThenElse(a,b,c);
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 18; i++) {
+    for (int i = 0; i < 19; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
