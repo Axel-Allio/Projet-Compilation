@@ -29,10 +29,19 @@ public class Evaluator extends Visitor
         resultString = Double.toString(result);
     }
     void visit(Add v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        result += temp;
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+    	    v.lhs.accept(this);
+    	    //String temp = sRes.replace("\"", "");
+            String temp = resultString;
+    	    v.rhs.accept(this);
+    	    resultString = temp + resultString;
+    	} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            result += temp;
+            }
         resultString = Double.toString(result);
     }
     void visit(Sub v){
@@ -124,5 +133,7 @@ public class Evaluator extends Visitor
 		v.aValue.accept(this);
 		toPrint.add(resultString);
 	}
+
+
 
 }

@@ -21,9 +21,11 @@ public interface JaggerConstants {
   /** RegularExpression Id. */
   int NUMBER = 9;
   /** RegularExpression Id. */
-  int DIGIT = 10;
+  int STRING = 10;
   /** RegularExpression Id. */
-  int VARIABLE = 11;
+  int DIGIT = 11;
+  /** RegularExpression Id. */
+  int VARIABLE = 12;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -40,6 +42,7 @@ public interface JaggerConstants {
     "\":=\"",
     "\"\\n\"",
     "<NUMBER>",
+    "<STRING>",
     "<DIGIT>",
     "<VARIABLE>",
     "\"==\"",
