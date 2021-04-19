@@ -81,7 +81,7 @@ Expression term():
 {
     a=factor()
     (
-      "*" b=factor() { a=new Mult(a,b); }
+      "*" b=factor() { a=new Mul(a,b); }
     | "/" b=factor() { a=new Div(a,b) }
     )* { return a; }
 }
