@@ -42,6 +42,8 @@ TOKEN:
 	|	<DIFF: "<>">
 	|	<LESS: "<">
 	|	<GREATER: ">">
+	|	<GREATEREQUAL: ">=">
+	|	<LESSEQUAL: "<=">
 
 }
 
@@ -122,5 +124,7 @@ void boolExpression():
 	(<EQUAL> expression()#EqualExpr(2) 
 	|<DIFF> expression()#DiffExpr(2) 
 	|<GREATER> expression()#GreatExpr(2) 
-	|<LESS> expression()#LessExpr(2) )
+	|<LESS> expression()#LessExpr(2)
+	|<GREATEREQUAL> expression()#GreatEqualExpr(2)
+	|<LESSEQUAL> expression()#LessEqualExpr(2))
 }

@@ -63,8 +63,12 @@ public class ExpressionVisitor implements ExpressionParserVisitor{
 
 	public Object visit(ASTStatement node, Object data) {
 		node.childrenAccept(this,data);
-		Integer value=(Integer)stack.removeFirst();
-		String var=(String)stack.removeFirst();
+		boolean boolValue;
+		Integer intValue;
+		String var;
+
+		Object value=stack.removeFirst();
+		var=(String)stack.removeFirst();
 		symbolTable.put(var,value);
 		return null;
 	}
@@ -116,9 +120,24 @@ public class ExpressionVisitor implements ExpressionParserVisitor{
 		return null;
 	}
 
+	public Object visit(ASTGreatEqualExpr node, Object data) {
+		node.childrenAccept(this,data);
+		Integer arg1=pop();
+		Integer arg2=pop();
+		stack.addFirst(new Boolean(arg2.intValue()>=arg1.intValue()));
+		return null;
+	}
+
+	public Object visit(ASTLessEqualExpr node, Object data) {
+		node.childrenAccept(this,data);
+		Integer arg1=pop();
+		Integer arg2=pop();
+		stack.addFirst(new Boolean(arg2.intValue()<=arg1.intValue()));
+		return null;
+	}
+
 	private Integer pop()
 	{
 		return (Integer)stack.removeFirst();
 	}
-
 }
