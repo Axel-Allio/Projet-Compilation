@@ -5,6 +5,7 @@ public class Evaluator extends Visitor
     private double result;
     private String resultString;
     private ArrayList<String> toPrint = new ArrayList<String>();
+    private Scope scope;
 
     public Evaluator(Expression e){
         e.accept(this);
@@ -13,12 +14,22 @@ public class Evaluator extends Visitor
 		System.out.println();
     }
 
+    public Evaluator(Scope s)
+	{
+		scope = s;
+	}
+
     // TYPE
     void visit(Char v){
         resultString = v.aValue;
     }
     void visit(Num v){
         result = v.aValue;
+        resultString = Double.toString(result);
+    }
+
+    void visit(Variable v){
+        scope.getInScope(v.name).accept(this);
         resultString = Double.toString(result);
     }
 
@@ -32,7 +43,7 @@ public class Evaluator extends Visitor
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
     	    v.lhs.accept(this);
             String temp = resultString.replace("\"","");
-             v.rhs.accept(this);
+            v.rhs.accept(this);
             resultString = "\""+temp + resultString.replace("\"", "") + "\"";
             System.out.println("temp = "+temp+"  result = "+resultString);
     	} 
@@ -51,7 +62,7 @@ public class Evaluator extends Visitor
             v.lhs.accept(this) ;
             Double temp = result;
             v.rhs.accept(this);
-            result = result - temp;
+            result = temp - result;
             resultString = Double.toString(result);   
         }
         else {
@@ -244,5 +255,19 @@ public class Evaluator extends Visitor
             v.aElse.accept(this);
         }
     }
+
+    public void visit(Scope s)
+    {
+    	scope = s;
+        for (Expression a : s.getInstructions()) {
+            a.accept(this);
+        }
+        scope = s.parent;
+    }
+
+    public double getResult(){
+        return result;
+    }
+
 
 }

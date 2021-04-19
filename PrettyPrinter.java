@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+
 public class PrettyPrinter extends Visitor
 {
-     private double result;
-    private String resultString;
+    private Scope scope;
+    private int nbOfScope;
 
     public PrettyPrinter(Expression e){
         e.accept(this);
@@ -15,6 +17,10 @@ public class PrettyPrinter extends Visitor
     void visit(Num v){
         System.out.print(v.aValue);
     }
+    public void visit(Variable v)
+	{
+		System.out.print(v.name);
+	}
 
     // CALCUL
     void visit(Neg v){
@@ -154,4 +160,40 @@ public class PrettyPrinter extends Visitor
 		v.aElse.accept(this);
 		System.out.print("\n");
     }
+
+
+    
+    public void indentScope(int n)
+    {
+    	for(int i=0 ; i<n ; i++){
+    		System.out.print("  ");
+    	}
+    }
+
+    public void visit(Scope s)
+	{
+		scope = s;
+		nbOfScope++;
+		System.out.println("let");
+		//variables
+		if(!s.data.isEmpty()){
+			for (String entry : scope.data.keySet()) {
+				indentScope(nbOfScope); 
+                System.out.print("var "+ entry + " := ");
+				scope.getInScope(entry).accept(this);
+				System.out.println();
+			}
+        }
+        ArrayList<Expression> instruction = scope.getInstructions();
+		indentScope(nbOfScope-1); System.out.println("in");
+		for (Expression a : instruction) {
+			indentScope(nbOfScope); 
+            a.accept(this);
+			System.out.println();
+		}
+		indentScope(nbOfScope-1); System.out.println("end");
+		nbOfScope--;
+		scope = s.parent;
+	}
+
 }
