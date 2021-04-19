@@ -5,6 +5,7 @@ public class Evaluator extends Visitor
     private double result;
     private String resultString;
     private ArrayList<String> toPrint = new ArrayList<String>();
+    private Scope scope;
 
     public Evaluator(Expression e){
         e.accept(this);
@@ -12,6 +13,11 @@ public class Evaluator extends Visitor
 			System.out.println(s);
 		System.out.println();
     }
+
+    public Evaluator(Scope s)
+	{
+		scope = s;
+	}
 
     // TYPE
     void visit(Char v){
@@ -244,5 +250,19 @@ public class Evaluator extends Visitor
             v.aElse.accept(this);
         }
     }
+
+    public void visit(Scope s)
+    {
+    	scope = s;
+        for (Expression a : s.getInstructions()) {
+            a.accept(this);
+        }
+        scope = s.parent;
+    }
+
+    public double getResult(){
+        return result;
+    }
+
 
 }

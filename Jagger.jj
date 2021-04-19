@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public class Jagger
 {
+    static Scope parent = null;
+
     public static void main(String args[]) throws ParseException
     {
         Jagger parser = new Jagger(System.in);
@@ -32,6 +34,13 @@ TOKEN:
 |    <THEN: "then">
 |    <ELSE: "else">
 
+|    <LET: "let">
+|    <IN: "in">
+|    <END: "end">
+|   < COMMA: "," >
+|    <VAR: "var">
+
+
 |   <ASSIGN: ":=">                                                  // Assignement
 
 
@@ -46,12 +55,12 @@ TOKEN:
 }
 
 // Main lopp: read expressions on a line until end of file.
-//     mainloop → (expression <EOL>)* <EOF>
+//     mainloop → (expression | scope)* <EOF>
 void mainloop():
 { Expression a; }
 {
     (
-      (a=print()|a=comparison()) <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
+      (a=print()|a=scope()) { new PrettyPrinter(a); System.out.println(); new Evaluator(a);; parent=null;}
     )*
     <EOF>
 }
@@ -65,6 +74,27 @@ Expression statement():
  | a = print())
  {return a;}
  }
+
+ //  scope -> let (declaration)* in instruction (, instruction)* end
+Expression scope():
+{ Expression a; Scope s = new Scope(parent); parent=s; }
+{
+    <LET>
+        (declaration())*
+    <IN>
+        a=statement() { s.addInstruction(a); } (<COMMA> a=statement() { s.addInstruction(a); })*
+    <END>
+    { return s; }
+}
+
+//  declaration -> (var <VARIABLE> := comparison)*
+void declaration():
+{ Token t; Exp a; }
+{
+    (
+      <VAR> t=<VARIABLE> <ASSIGN> a=comparison() { parent.addDeclaration(t.toString(), a); }
+    ) 
+}
 
 //Print.
 // print -> print(comparison())
@@ -145,6 +175,7 @@ Expression prefactor():
 {
     (<IF> a=comparison() <THEN> (b=comparison()|b=print()) <ELSE> (c=comparison()|c=print()) { a = new IfThenElse(a,b,c);}
     |a=factor()
+    |a=scope()
     )+
     {return a;}
 }

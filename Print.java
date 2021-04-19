@@ -4,7 +4,7 @@ public class Print extends Expression
 
 	public Print(Expression a)
 	{
-		aValue = a;;
+		aValue = a;
 	}
 
     public void accept(Visitor v)

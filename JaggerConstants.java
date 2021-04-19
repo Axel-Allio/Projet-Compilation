@@ -21,17 +21,27 @@ public interface JaggerConstants {
   /** RegularExpression Id. */
   int ELSE = 9;
   /** RegularExpression Id. */
-  int ASSIGN = 10;
+  int LET = 10;
   /** RegularExpression Id. */
-  int EOL = 11;
+  int IN = 11;
   /** RegularExpression Id. */
-  int NUMBER = 12;
+  int END = 12;
   /** RegularExpression Id. */
-  int STRING = 13;
+  int COMMA = 13;
   /** RegularExpression Id. */
-  int DIGIT = 14;
+  int VAR = 14;
   /** RegularExpression Id. */
-  int VARIABLE = 15;
+  int ASSIGN = 15;
+  /** RegularExpression Id. */
+  int EOL = 16;
+  /** RegularExpression Id. */
+  int NUMBER = 17;
+  /** RegularExpression Id. */
+  int STRING = 18;
+  /** RegularExpression Id. */
+  int DIGIT = 19;
+  /** RegularExpression Id. */
+  int VARIABLE = 20;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -48,6 +58,11 @@ public interface JaggerConstants {
     "\"if\"",
     "\"then\"",
     "\"else\"",
+    "\"let\"",
+    "\"in\"",
+    "\"end\"",
+    "\",\"",
+    "\"var\"",
     "\":=\"",
     "\"\\n\"",
     "<NUMBER>",
