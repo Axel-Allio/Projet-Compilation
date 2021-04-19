@@ -3,6 +3,10 @@ options { LOOKAHEAD=1; FORCE_LA_CHECK=true; }
 
 // Fonction principale
 PARSER_BEGIN(Jagger)
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Jagger
 {
     public static void main(String args[]) throws ParseException
@@ -91,8 +95,8 @@ Expression expression():
 {
     a=term()
     (
-      "+" b=expression() { a=new Add(a,b); }
-    | "-" b=expression() { a=new Sub(a,b); }
+      "+" b=term() { a=new Add(a,b); }
+    | "-" b=term() { a=new Sub(a,b); }
     )? { return a; }
 }
 
@@ -125,6 +129,8 @@ Expression unary():
 Expression factor():
 { Token t; Expression e; }
 {
-      t=<NUMBER> {new Num(Double.parseDouble(t.toString())); }
-    | <LRB> e=expression() <RRB> { return e; }
+      (t=<NUMBER> {e = new Num(Double.parseDouble(t.toString())); }
+    | <LRB> e=comparison() <RRB>)
+    { return e; }
+   
 }
