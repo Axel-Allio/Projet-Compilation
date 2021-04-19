@@ -29,22 +29,22 @@ public class Scope extends Expression
     }
 
     public void changeValue(String s, Expression e){
-        Evaluator ev = new Evaluator(e);
+        Evaluator ev = new Evaluator(this);
         e.accept(ev);
         Num value = new Num(ev.getResult());
         if(data.containsKey(s)){
-            data.remove(s);
-            data.put(s, value);
+            data.remove(s);   
         }
-        else
-            System.out.println("The variable " + s + " does not exist in the scope.");
+        data.put(s, value);
     }
 
     public Expression getInScope(String s){
-        if(data.containsKey(s))
+        if(data.containsKey(s)){
             return data.get(s);
-        else if(parent != null)            
+            }
+        else if(parent != null) {
             return parent.getInScope(s);
+            }
         else{
             System.out.println("The variable " + s + " does not exist in the scope");
             return null;

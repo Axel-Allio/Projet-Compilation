@@ -1,1 +1,1 @@
-let var i:=1 in i:=5 end
+let var i:=1 in i:=i+5, print(i) end
