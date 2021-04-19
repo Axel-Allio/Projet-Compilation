@@ -1,1 +1,1 @@
-let var i:=1 in i:=i+1, print(i) end
+let var foo in end

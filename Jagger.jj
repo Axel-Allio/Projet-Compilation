@@ -93,7 +93,7 @@ Expression scope():
 void declaration():
 { Token t; Expression a; }
 {
-      <VAR> t=<VARIABLE> <ASSIGN> a=comparison() { parent.addDeclaration(t.toString(), a); } 
+      <VAR> t=<VARIABLE> <ASSIGN> a=comparison() {parent.addDeclaration(t.toString(), a);} 
 }
 
 //Print.
