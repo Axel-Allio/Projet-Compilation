@@ -19,17 +19,22 @@ SKIP: { " " | "\r" | "\t" }
 // Token specifications.
 TOKEN:
 {
-    < NUMBER: (<DIGIT>)+ ("." (<DIGIT>)*)? >  // A decimal number.
-|   < DIGIT: ["0"-"9"] >                      // A decimal digit.
-|   < VARIABLE: ["a"-"z", "A"-"Z"](["a"-"z", "A"-"Z","0"-"9"])* >   // Variable
+
+   <PRINT: "print">                         // Print
+|   <LRB: "(">                                // Left round bracket
+|   <RRB: ")">                                // Right round bracket
+
 
 |   <ASSIGN: ":=">                           // Assignement
-|   <LB: "(">                                // Left bracket
-|   <RB: ")">                                // Right bracket
 
-|   <PRINT: "print">                         // Print
+
 
 |   < EOL: "\n" >                            // End of line.
+
+// Type
+|    < NUMBER: (<DIGIT>)+ ("." (<DIGIT>)*)? >  // A decimal number.
+|   < DIGIT: ["0"-"9"] >                      // A decimal digit.
+|   < VARIABLE: ["a"-"z", "A"-"Z"](["a"-"z", "A"-"Z","0"-"9"])* >   // Variable
 }
 
 // Main lopp: read expressions on a line until end of file.
@@ -38,7 +43,7 @@ void mainloop():
 { Expression a; }
 {
     (
-      a=expression() <EOL> { System.out.println(a); }
+      a=print() <EOL> { new PrettyPrinter(e); System.out.println(); new Eval(e); parent=null; }
     )*
     <EOF>
 }
@@ -59,7 +64,7 @@ Expression statement():
 Expression print():
 {Expression a;}
 {
-    <PRINT> <LB> a = comparison() <RB> {new Print(a);return a;}
+    <PRINT><LRB> a = comparison() <RRB> {new Print(a);return a;}
 }
 
 // Comparison operators.

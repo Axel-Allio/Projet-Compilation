@@ -9,21 +9,21 @@ public interface JaggerConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int NUMBER = 4;
+  int PRINT = 4;
   /** RegularExpression Id. */
-  int DIGIT = 5;
+  int LRB = 5;
   /** RegularExpression Id. */
-  int VARIABLE = 6;
+  int RRB = 6;
   /** RegularExpression Id. */
   int ASSIGN = 7;
   /** RegularExpression Id. */
-  int LB = 8;
+  int EOL = 8;
   /** RegularExpression Id. */
-  int RB = 9;
+  int NUMBER = 9;
   /** RegularExpression Id. */
-  int PRINT = 10;
+  int DIGIT = 10;
   /** RegularExpression Id. */
-  int EOL = 11;
+  int VARIABLE = 11;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -34,14 +34,14 @@ public interface JaggerConstants {
     "\" \"",
     "\"\\r\"",
     "\"\\t\"",
+    "\"print\"",
+    "\"(\"",
+    "\")\"",
+    "\":=\"",
+    "\"\\n\"",
     "<NUMBER>",
     "<DIGIT>",
     "<VARIABLE>",
-    "\":=\"",
-    "\"(\"",
-    "\")\"",
-    "\"print\"",
-    "\"\\n\"",
     "\"==\"",
     "\"<>\"",
     "\">\"",

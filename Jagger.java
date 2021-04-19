@@ -13,8 +13,7 @@ public class Jagger implements JaggerConstants {
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case NUMBER:
-      case LB:{
+      case PRINT:{
         ;
         break;
         }
@@ -22,9 +21,9 @@ public class Jagger implements JaggerConstants {
         jj_la1[0] = jj_gen;
         break label_1;
       }
-      a = expression();
+      a = print();
       jj_consume_token(EOL);
-System.out.println(a);
+new PrettyPrinter(e); System.out.println(); new Eval(e); parent=null;
     }
     jj_consume_token(0);
   }
@@ -33,8 +32,8 @@ System.out.println(a);
 //statement → print | comparison
   static final public Expression statement() throws ParseException {Token t; Expression a;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case NUMBER:
-    case LB:{
+    case LRB:
+    case NUMBER:{
       a = comparison();
       break;
       }
@@ -55,9 +54,9 @@ System.out.println(a);
 // print -> print(comparison())
   static final public Expression print() throws ParseException {Expression a;
     jj_consume_token(PRINT);
-    jj_consume_token(LB);
+    jj_consume_token(LRB);
     a = comparison();
-    jj_consume_token(RB);
+    jj_consume_token(RRB);
 new Print(a);{if ("" != null) return a;}
     throw new Error("Missing return statement in function");
   }
@@ -209,8 +208,8 @@ a=new Div(a,b);
 a=new Neg(a);
       break;
       }
+    case LRB:
     case NUMBER:
-    case LB:
     case 18:{
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case 18:{
@@ -242,10 +241,10 @@ a=new Neg(a);
 new Num(Double.parseDouble(t.toString()));
       break;
       }
-    case LB:{
-      jj_consume_token(LB);
+    case LRB:{
+      jj_consume_token(LRB);
       e = expression();
-      jj_consume_token(RB);
+      jj_consume_token(RRB);
 {if ("" != null) return e;}
       break;
       }
@@ -273,7 +272,7 @@ new Num(Double.parseDouble(t.toString()));
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x110,0x510,0x3f000,0x3f000,0xc0000,0xc0000,0x300000,0x300000,0x40000,0xc0110,0x110,};
+      jj_la1_0 = new int[] {0x10,0x230,0x3f000,0x3f000,0xc0000,0xc0000,0x300000,0x300000,0x40000,0xc0220,0x220,};
    }
 
   /** Constructor with InputStream. */
