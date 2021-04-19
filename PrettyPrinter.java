@@ -11,10 +11,10 @@ public class PrettyPrinter extends Visitor
 
     // TYPE
     void visit(Char v){
-        resultString = v.aValue;
+        System.out.print(v.aValue);
     }
     void visit(Num v){
-        resultString = v.aValue.toString();
+        System.out.print(v.aValue);
     }
 
     // CALCUL
@@ -41,28 +41,83 @@ public class PrettyPrinter extends Visitor
 
     // COMPARISON
     void visit(Equal v){
-        resultBool = v.lhs == v.rhs;
-        resultString = resultBool.toString();
+        System.out.print("(");
+        v.lhs.accept(this);
+        System.out.print("==");
+        v.rhs.accept(this);
+        System.out.print(")");
     }
     void visit(NonEqual v){
-        resultBool = v.lhs != v.rhs
-        resultString = resultBool.toString();
+        System.out.print("(");
+		v.lhs.accept(this);
+		System.out.print(" != ");
+		v.rhs.accept(this);
+		System.out.print(")");
     }
     void visit(Inf v){
-        resultBool = v.lhs < v.rhs
-        resultString = resultBool.toString();
+        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(".Length < ");
+			v.rhs.accept(this);
+			System.out.print(".Length)");
+		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(" < ");
+			v.rhs.accept(this);
+			System.out.print(")");
+		} else
+		System.out.println("Incompatible types.");
     }
     void visit(Sup v){
         resultBool = v.lhs > v.rhs
-        resultString = resultBool.toString();
+        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(".Length < ");
+			v.rhs.accept(this);
+			System.out.print(".Length)");
+		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(" > ");
+			v.rhs.accept(this);
+			System.out.print(")");
+		} else
+		System.out.println("Incompatible types.");
     }
     void visit(SupEqual v){
-        resultBool = v.lhs >= v.rhs
-        resultString = resultBool.toString();
+        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(".Length < ");
+			v.rhs.accept(this);
+			System.out.print(".Length)");
+		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(" >= ");
+			v.rhs.accept(this);
+			System.out.print(")");
+		} else
+		System.out.println("Incompatible types.");
     }
     void visit(InfEqual v){
-        resultBool = v.lhs <= v.rhs
-        resultString = resultBool.toString();
+        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(".Length < ");
+			v.rhs.accept(this);
+			System.out.print(".Length)");
+		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+			System.out.print("(");
+			v.lhs.accept(this);
+			System.out.print(" <= ");
+			v.rhs.accept(this);
+			System.out.print(")");
+		} else
+		System.out.println("Incompatible types.");
     }
 
 }
