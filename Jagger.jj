@@ -21,7 +21,15 @@ TOKEN:
 {
     < NUMBER: (<DIGIT>)+ ("." (<DIGIT>)*)? >  // A decimal number.
 |   < DIGIT: ["0"-"9"] >                      // A decimal digit.
-|   < EOL: "\n" >                             // End of line.
+|   < VARIABLE: ["a"-"z", "A"-"Z"](["a"-"z", "A"-"Z","0"-"9"])* >   // Variable
+
+|   <ASSIGN: ":=">                           // Assignement
+|   <LB: "(">                                // Left bracket
+|   <RB: ")">                                // Right bracket
+
+|   <PRINT: "print">                         // Print
+
+|   < EOL: "\n" >                            // End of line.
 }
 
 // Main lopp: read expressions on a line until end of file.
@@ -35,6 +43,25 @@ void mainloop():
     <EOF>
 }
 
+//Statement
+//statement → print | comparison
+Expression statement():
+{Token t, Expression a}
+{
+ t = <VARIABLE> <ASSIGN>(a=comparison() { a=new Assignment(t.toString(), a, parent); }
+ | a = comparison()
+ | a = print()
+ )
+}
+
+//print
+// print -> print(comparison())
+Expression print():
+{Expression a}
+{
+    <PRINT> <LB> a = comparison() <RB> {new Print(a)}
+}
+
 // Expression (the axiom).
 // E -> T ('+'T | '-'T)*
 Expression expression():
@@ -42,8 +69,8 @@ Expression expression():
 {
     a=term()
     (
-      "+" b=expression() { new Add(a,b); }
-    | "-" b=expression() { new Sub(a,b); }
+      "+" b=expression() { a=new Add(a,b); }
+    | "-" b=expression() { a=new Sub(a,b); }
     )? { return a; }
 }
 
@@ -54,8 +81,8 @@ Expression term():
 {
     a=factor()
     (
-      "*" b=factor() { new Mult(a,b); }
-    | "/" b=factor() { new Div(a,b) }
+      "*" b=factor() { a=new Mult(a,b); }
+    | "/" b=factor() { a=new Div(a,b) }
     )* { return a; }
 }
 
@@ -66,7 +93,7 @@ Expression unary():
 {Expression a}
 {
     (
-    "-" factor() {new Negative(a);}
+    "-" factor() {a=new Neg(a);}
     | ("+")? factor()
     ){return a;}
 }
