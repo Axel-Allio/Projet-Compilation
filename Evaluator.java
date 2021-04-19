@@ -45,7 +45,6 @@ public class Evaluator extends Visitor
             String temp = resultString.replace("\"","");
             v.rhs.accept(this);
             resultString = "\""+temp + resultString.replace("\"", "") + "\"";
-            System.out.println("temp = "+temp+"  result = "+resultString);
     	} 
         else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
             v.lhs.accept(this) ;
@@ -54,7 +53,7 @@ public class Evaluator extends Visitor
             result += temp;
             resultString = Double.toString(result);
         } else
-		    System.out.println("These types can not be operated together.");
+		    System.out.println("Incompatible types");
         
     }
     void visit(Sub v){
@@ -67,7 +66,7 @@ public class Evaluator extends Visitor
         }
         else {
 			result = 0;
-			System.out.println("These types can not be operated together.");
+			System.out.println("Incompatible types");
 		}
     }
     void visit(Mul v){
@@ -80,7 +79,7 @@ public class Evaluator extends Visitor
         }
         else {
 			result = 0;
-			System.out.println("These types can not be operated together.");
+			System.out.println("Incompatible types");
 		}
     }
     void visit(Div v){
@@ -93,7 +92,7 @@ public class Evaluator extends Visitor
         }
         else {
 			result = 0;
-			System.out.println("These types can not be operated together.");
+			System.out.println("Incompatible types");
 		}
     }
 
@@ -119,7 +118,7 @@ public class Evaluator extends Visitor
             resultString = Double.toString(result);
         }
         else
-            System.out.println("These types can not be operated together.");
+            System.out.println("Incompatible types");
     }
     void visit(NonEqual v){
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
@@ -142,7 +141,7 @@ public class Evaluator extends Visitor
             resultString = Double.toString(result);  
         }
         else
-            System.out.println("These types can not be operated together.");
+            System.out.println("Incompatible types");
     }
 
     void visit(Inf v){
@@ -166,7 +165,7 @@ public class Evaluator extends Visitor
             resultString = Double.toString(result);   
         }
         else
-            System.out.println("These types can not be operated together.");
+            System.out.println("Incompatible types");
     }
 
     void visit(Sup v){
@@ -190,7 +189,7 @@ public class Evaluator extends Visitor
             resultString = Double.toString(result);
         }
         else
-            System.out.println("These types can not be operated together.");
+            System.out.println("Incompatible types");
     }
     void visit(SupEqual v){
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
@@ -213,7 +212,7 @@ public class Evaluator extends Visitor
             resultString = Double.toString(result);  
         }
         else
-            System.out.println("These types can not be operated together.");
+            System.out.println("Incompatible types");
 
     }
     void visit(InfEqual v){
@@ -237,7 +236,7 @@ public class Evaluator extends Visitor
             resultString = Double.toString(result);
         }
         else
-            System.out.println("These types can not be operated together.");
+            System.out.println("Incompatible types");
     }
 
     void visit(Print v)
