@@ -1,0 +1,1 @@
+let var i:=1 in i:=5 end
