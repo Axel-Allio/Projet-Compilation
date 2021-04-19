@@ -236,7 +236,6 @@ public class Evaluator extends Visitor
 	}
 
     void visit(IfThenElse v){
-    System.out.println("pp part");
         v.aCondition.accept(this);
         if(result==1){
             v.aThen.accept(this);
