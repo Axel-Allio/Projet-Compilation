@@ -1,12 +1,12 @@
 public abstract class Visitor
 {
     ///////TYPES///////
-    abstract void visit(Chaine n);
+    abstract void visit(Char n);
     abstract void visit(Num n);
 
     ///////CALCULS///////
     //unary
-    abstract void visit(UnNeg n);
+    abstract void visit(Neg n);
     //binary
     abstract void visit(Add n);
     abstract void visit(Sub n);
@@ -23,9 +23,9 @@ public abstract class Visitor
 
     ///////KEYWORDS///////
     abstract void visit(Print n);
-    abstract void visit(Ins n);
-    abstract void visit(Variable n);
-    abstract void visit(Scope n);
-    abstract void visit(Assignment n);
-    abstract void visit(Function n);
+    // abstract void visit(Ins n);
+    //abstract void visit(Variable n);
+    //abstract void visit(Scope n);
+    //abstract void visit(Assignment n);
+    //abstract void visit(Function n);
 }

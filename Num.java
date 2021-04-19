@@ -9,6 +9,6 @@ public class Num extends Expression
     
     public void accept(Visitor v)
     {
-        v.visitNum(this);
+        v.visit(this);
     }
 }

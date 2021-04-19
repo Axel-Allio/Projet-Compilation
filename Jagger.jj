@@ -35,7 +35,7 @@ TOKEN:
 // Main lopp: read expressions on a line until end of file.
 //     mainloop → (expression <EOL>)* <EOF>
 void mainloop():
-{ double a; }
+{ Expression a; }
 {
     (
       a=expression() <EOL> { System.out.println(a); }
@@ -46,20 +46,38 @@ void mainloop():
 //Statement
 //statement → print | comparison
 Expression statement():
-{Token t, Expression a}
+{Token t; Expression a;}
 {
- t = <VARIABLE> <ASSIGN>(a=comparison() { a=new Assignment(t.toString(), a, parent); }
- | a = comparison()
+ (a = comparison()
  | a = print()
+ {return a;}
  )
 }
 
-//print
+//Print.
 // print -> print(comparison())
 Expression print():
-{Expression a}
+{Expression a;}
 {
-    <PRINT> <LB> a = comparison() <RB> {new Print(a)}
+    <PRINT> <LB> a = comparison() <RB> {new Print(a);return a;}
+}
+
+// Comparison operators.
+// C -> E ('=='E | '<>'E | '>'E | '<'E | '>='E | '<='E)*
+Expression comparison():
+{ Expression a,b; }
+{
+    
+    a=expression()
+    (
+      "=="  b=expression()  { a = new Equal(a,b); }
+    | "<>"  b=expression()  { a = new NonEqual(a,b); }
+    | ">"   b=expression()  { a = new Sup(a,b); }
+    | "<"   b=expression()  { a = new Inf(a,b); }
+    | ">="  b=expression()  { a = new SupEqual(a,b); }
+    | "<="  b=expression()  { a = new InfEqual(a,b); }
+    )?
+    { return a; }
 }
 
 // Expression (the axiom).
@@ -82,7 +100,7 @@ Expression term():
     a=factor()
     (
       "*" b=factor() { a=new Mul(a,b); }
-    | "/" b=factor() { a=new Div(a,b) }
+    | "/" b=factor() { a=new Div(a,b); }
     )* { return a; }
 }
 
@@ -90,19 +108,19 @@ Expression term():
 //Unary expression
 // U -> "-" F | ("+")?F
 Expression unary():
-{Expression a}
+{Expression a;}
 {
     (
-    "-" factor() {a=new Neg(a);}
-    | ("+")? factor()
+    "-" a=factor() {a=new Neg(a);}
+    | ("+")? a=factor()
     ){return a;}
 }
 
 // Factor of an expression.
 // F -> <NUMBER> | "(" E ")"
 Expression factor():
-{ Token t; double e; }
+{ Token t; Expression e; }
 {
-      t=<NUMBER> { return Double.parseDouble(t.toString()); }
+      t=<NUMBER> {new Num(Double.parseDouble(t.toString())); }
     | "(" e=expression() ")" { return e; }
 }
