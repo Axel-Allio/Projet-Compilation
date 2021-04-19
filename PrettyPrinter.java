@@ -18,37 +18,37 @@ public class PrettyPrinter extends Visitor
 
     // CALCUL
     void visit(Neg v){
-        System.out.println("(- ");
+        System.out.print("(- ");
         v.aValue.accept(this);
-        System.out.println(")");
+        System.out.print(")");
     }
     void visit(Add v){
-        System.out.println("(");
+        System.out.print("(");
         v.lhs.accept(this);
-        System.out.println( "+" );
+        System.out.print( "+" );
         v.rhs.accept(this);
-        System.out.println(")");
+        System.out.print(")");
     }
     void visit(Sub v){
-        System.out.println("(");
+        System.out.print("(");
         v.lhs.accept(this);
-        System.out.println( "-" );
+        System.out.print( "-" );
         v.rhs.accept(this);
-        System.out.println(")");
+        System.out.print(")");
     }
     void visit(Mul v){
-        System.out.println("(");
+        System.out.print("(");
         v.lhs.accept(this);
-        System.out.println( "*" );
+        System.out.print( "*" );
         v.rhs.accept(this);
-        System.out.println(")");
+        System.out.print(")");
     }
     void visit(Div v){
-        System.out.println("(");
+        System.out.print("(");
         v.lhs.accept(this);
-        System.out.println( "/" );
+        System.out.print( "/" );
         v.rhs.accept(this);
-        System.out.println(")");
+        System.out.print(")");
     }
 
     // COMPARISON

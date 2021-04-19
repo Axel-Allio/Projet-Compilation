@@ -8,7 +8,9 @@ public class Evaluator extends Visitor
 
     public Evaluator(Expression e){
         e.accept(this);
-
+        for(String s:toPrint)
+			System.out.println(s);
+		System.out.println();
     }
 
     // TYPE
