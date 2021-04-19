@@ -12,7 +12,7 @@ public class Jagger implements JaggerConstants {
         parser.mainloop();
     }
 
-//////////////////Main lopp: read expressions on a line until end of file.//////////////////
+////////////////// Main lopp: read expressions on a line until end of file. //////////////////
 //     mainloop -> (expression | scope)* <EOF>
   static final public void mainloop() throws ParseException {Expression a;
     label_1:
@@ -59,7 +59,7 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
     jj_consume_token(0);
   }
 
-//////////////////Statement//////////////////
+////////////////// Statement //////////////////
 //statement -> print | comparison
   static final public Expression statement() throws ParseException {Token t; Expression a;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -133,7 +133,7 @@ s.addInstruction(a);
     throw new Error("Missing return statement in function");
   }
 
-//////////////////Declaration//////////////////
+////////////////// Declaration //////////////////
 //  declaration -> (var <VARIABLE> := comparison)*
   static final public void declaration() throws ParseException {Token t; Expression a;
     jj_consume_token(VAR);
@@ -154,7 +154,7 @@ parent.addDeclaration(t.toString(), a);
     throw new Error("Missing return statement in function");
   }
 
-//////////////////Comparison//////////////////
+////////////////// Comparison //////////////////
 // C -> E ('=='E | '<>'E | '>'E | '<'E | '>='E | '<='E)*
   static final public Expression comparison() throws ParseException {Expression a,b;
     a = expression();
@@ -217,7 +217,7 @@ a = new InfEqual(a,b);
     throw new Error("Missing return statement in function");
   }
 
-////////////////// Expression//////////////////
+////////////////// Expression //////////////////
 // E -> T ('+'T | '-'T)*
   static final public Expression expression() throws ParseException {Expression a,b;
     a = term();
@@ -252,7 +252,7 @@ a=new Sub(a,b);
     throw new Error("Missing return statement in function");
   }
 
-////////////////// Term//////////////////
+////////////////// Term //////////////////
 // T -> U ('*'U | '/'U)*
   static final public Expression term() throws ParseException {Expression a,b;
     a = unary();
@@ -359,7 +359,7 @@ a = new Char(t.toString());
   }
 
 ////////////////// Prefactor //////////////////
-// P -> <IF> C <THEN> C| "(" E ")"
+// P -> (<IF> C <THEN> C <ELSE> C)|F|S|V)+
   static final public Expression prefactor() throws ParseException {Expression a,b,c;
     label_6:
     while (true) {
@@ -413,6 +413,7 @@ a = new IfThenElse(a,b,c);
   }
 
 ////////////////// Variable //////////////////
+//V -> <VARIABLE>
   static final public Expression variable() throws ParseException {Token t;
     t = jj_consume_token(VARIABLE);
 {if ("" != null) return new Variable(t.toString());}
