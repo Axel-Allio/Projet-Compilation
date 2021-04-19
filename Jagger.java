@@ -70,6 +70,10 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
 a=new Assignment(t.toString(), a, parent);
       break;
       }
+    case PRINT:{
+      a = print();
+      break;
+      }
     case LRB:
     case IF:
     case LET:
@@ -78,10 +82,6 @@ a=new Assignment(t.toString(), a, parent);
     case 27:
     case 28:{
       a = comparison();
-      break;
-      }
-    case PRINT:{
-      a = print();
       break;
       }
     default:

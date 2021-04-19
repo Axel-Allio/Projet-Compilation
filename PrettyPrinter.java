@@ -94,7 +94,7 @@ public class PrettyPrinter extends Visitor
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			System.out.print("(");
 			v.lhs.accept(this);
-			System.out.print(".Length < ");
+			System.out.print(".Length > ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
 		} 
