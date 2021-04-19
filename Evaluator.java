@@ -10,17 +10,17 @@ public class Evaluator
     }
 
     // TYPE
-    void visit(Chaine n);
-    void visit(Num n){
+    void visit(Chaine v);
+    void visit(Num v){
         
     }
 
     // CALCUL
-    void visit(Neg n);
-    void visit(Add n);
-    void visit(Sub n);
-    void visit(Mul n);
-    void visit(Div n);
+    void visit(Neg v);
+    void visit(Add v);
+    void visit(Sub v);
+    void visit(Mul v);
+    void visit(Div v);
 
     // COMPARISON
     void visit(Equal n){
