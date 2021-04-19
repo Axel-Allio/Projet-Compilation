@@ -10,7 +10,7 @@ public class PrettyPrinter extends Visitor
 
     }
 
-    // TYPE
+    /////// Type ///////
     void visit(Char v){
         System.out.print(v.aValue);
     }
@@ -22,7 +22,7 @@ public class PrettyPrinter extends Visitor
 		System.out.print(v.name);
 	}
 
-    // CALCUL
+    /////// Calcul ///////
     void visit(Neg v){
         System.out.print("(- ");
         v.aValue.accept(this);
@@ -57,7 +57,7 @@ public class PrettyPrinter extends Visitor
         System.out.print(")");
     }
 
-    // COMPARISON
+    /////// Comparison ///////
     void visit(Equal v){
         System.out.print("(");
         v.lhs.accept(this);
@@ -145,6 +145,8 @@ public class PrettyPrinter extends Visitor
 		    System.out.println("Incompatible types.");
     }
 
+    /////// KeyWord ///////
+
     void visit(Print v){
         System.out.print("print(");
 		v.aValue.accept(this);
@@ -161,21 +163,11 @@ public class PrettyPrinter extends Visitor
 		System.out.print("\n");
     }
 
-
-    
-    public void indentScope(int n)
-    {
-    	for(int i=0 ; i<n ; i++){
-    		System.out.print("  ");
-    	}
-    }
-
     public void visit(Scope s)
 	{
 		scope = s;
 		nbOfScope++;
 		System.out.println("let");
-		//variables
 		if(!s.data.isEmpty()){
 			for (String entry : scope.data.keySet()) {
 				indentScope(nbOfScope); 
@@ -202,4 +194,13 @@ public class PrettyPrinter extends Visitor
 		System.out.print(" := ");
 		v.aValue.accept(this);
 	}
+
+
+/////// Usefull Function ///////
+	    public void indentScope(int n)
+    {
+    	for(int i=0 ; i<n ; i++){
+    		System.out.print("  ");
+    	}
+    }
 }

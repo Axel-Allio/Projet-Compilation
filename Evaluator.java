@@ -19,7 +19,7 @@ public class Evaluator extends Visitor
 		scope = s;
 	}
 
-    // TYPE
+    /////// Type ///////
     void visit(Char v){
         resultString = v.aValue;
     }
@@ -33,7 +33,7 @@ public class Evaluator extends Visitor
         resultString = Double.toString(result);
     }
 
-    // CALCUL
+    /////// Calcul ///////
     void visit(Neg v){
         v.aValue.accept(this);
         result = -result;
@@ -96,7 +96,7 @@ public class Evaluator extends Visitor
 		}
     }
 
-    // COMPARISON
+    /////// Comparison ///////
     void visit(Equal v){
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			v.lhs.accept(this);
@@ -239,6 +239,7 @@ public class Evaluator extends Visitor
             System.out.println("Incompatible types");
     }
 
+    /////// KeyWord ///////
     void visit(Print v)
 	{
 		v.aValue.accept(this);
@@ -269,6 +270,7 @@ public class Evaluator extends Visitor
 		v.scope.changeValue(v.aName, v.aValue);
 	}
 
+    /////// Usefull Function ///////
     public double getResult(){
         return this.result;
     }
