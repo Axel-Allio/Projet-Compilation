@@ -10,9 +10,11 @@ public class Evaluator
     }
 
     // TYPE
-    void visit(Chaine v);
-    void visit(Num v){
+    void visit(Chaine v){
         
+    }
+    void visit(Num v){
+        resultString = v.aValue.ToString();
     }
 
     // CALCUL
