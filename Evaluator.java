@@ -1,6 +1,7 @@
 public class Visitor
 {
     private double result;
+    private bool resultBool;
     private String resultString;
 
 
@@ -18,11 +19,29 @@ public class Visitor
     void visit(Div n);
 
     // COMPARISON
-    void visit(Equal n);
-    void visit(NonEqual n);
-    void visit(Inf n);
-    void visit(Sup n);
-    void visit(SupEqual n);
-    void visit(InfEqual n);
+    void visit(Equal n){
+        resultBool = n.lhs == n.rhs;
+        resultString = resultBool.toString();
+    }
+    void visit(NonEqual n){
+        resultBool = n.lhs != n.rhs
+        resultString = resultBool.toString();
+    }
+    void visit(Inf n){
+        resultBool = n.lhs < n.rhs
+        resultString = resultBool.toString();
+    }
+    void visit(Sup n){
+        resultBool = n.lhs > n.rhs
+        resultString = resultBool.toString();
+    }
+    void visit(SupEqual n){
+        resultBool = n.lhs >= n.rhs
+        resultString = resultBool.toString();
+    }
+    void visit(InfEqual n){
+        resultBool = n.lhs <= n.rhs
+        resultString = resultBool.toString();
+    }
 
 }
