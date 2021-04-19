@@ -1,9 +1,13 @@
-public class Visitor
+public class Evaluator
 {
     private double result;
     private bool resultBool;
     private String resultString;
 
+    public Evaluator(Expression e){
+        e.accept(this);
+
+    }
 
     // TYPE
     void visit(Chaine n);
