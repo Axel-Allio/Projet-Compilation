@@ -1,3 +1,4 @@
+print("TEST")
 print(1)
 print(-1)
 print(3+4)
@@ -21,9 +22,11 @@ print(5==6)
 print(5<>5)
 print(4<>5)
 
+print("TEST IF THEN ELSE")
 print(if if 1 then 1 else 20 then 1+2 else 3+2)
 print(if if 0 then 1 else 2 then 1+2 else 3+2)
 
+print("TEST CHAINES DE CARACTERES")
 print("bonjour")
 print("bon"+"jour")
 print("bon"<"jour")
@@ -32,10 +35,12 @@ print("bon"=="jour")
 print("1"==1)
 print(if 1 then "1" else 1)
 
+print("TEST VARIABLES ET SCOPES")
 let in 1 + 1 end
 let var i := 1 in print(i) end
-let var i := 10 in print(i) let var i := i * i  in print(i) end print(i) end
+let var i := 10 in print(i), let var i := i * i  in print(i) end print(i) end
 let var foo in end
 let var foo := 1 var bar := 1 var foo := 1 in 1 end
 
+print("TEST AFFECTATION")
 let var i:=1 in i:=i+1 print(i) end
