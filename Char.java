@@ -1,10 +1,10 @@
 public class Char extends Expression
 {
-    public String aVal;
+    public String aValue;
 
-    public Char(String pVal)
+    public Char(String pValue)
     {
-        aVal = pVal;
+        aValue = pValue;
     }
     
     public void accept(Visitor v)
