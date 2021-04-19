@@ -24,8 +24,8 @@ public abstract class Visitor
     ///////KEYWORDS///////
     abstract void visit(Print v);
     abstract void visit(IfThenElse v);
-    //abstract void visit(Variable v);
-    //abstract void visit(Scope v);
+    abstract void visit(Variable v);
+    abstract void visit(Scope v);
     //abstract void visit(Assignment v);
     //abstract void visit(Function v);
 }

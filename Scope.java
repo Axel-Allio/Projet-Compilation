@@ -7,8 +7,6 @@ public class Scope extends Expression
     public Scope parent;
     public HashMap<String, Expression> data;
 	public ArrayList<Expression> instructions;
-    public HashMap<String, Function> functions;
-    public Function bindedFunction;
 
     //constructor
     public Scope(Scope s)
@@ -16,7 +14,6 @@ public class Scope extends Expression
         parent = s;
         data = new HashMap<String, Expression>();
         instructions = new ArrayList<Expression>();
-        functions = new HashMap<String, Function>();
     }
 
     //data

@@ -41,7 +41,8 @@ public class Jagger implements JaggerConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-new PrettyPrinter(a); System.out.println(); new Evaluator(a);; parent=null;
+      jj_consume_token(EOL);
+new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
     }
     jj_consume_token(0);
   }
@@ -55,6 +56,7 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a);; parent=null;
     case LET:
     case NUMBER:
     case STRING:
+    case VARIABLE:
     case 27:
     case 28:{
       a = comparison();
@@ -113,7 +115,7 @@ s.addInstruction(a);
   }
 
 //  declaration -> (var <VARIABLE> := comparison)*
-  static final public void declaration() throws ParseException {Token t; Exp a;
+  static final public void declaration() throws ParseException {Token t; Expression a;
     jj_consume_token(VAR);
     t = jj_consume_token(VARIABLE);
     jj_consume_token(ASSIGN);
@@ -284,6 +286,7 @@ a=new Neg(a);
     case LET:
     case NUMBER:
     case STRING:
+    case VARIABLE:
     case 27:{
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case 27:{
@@ -349,6 +352,7 @@ a = new Char(t.toString());
         case LET:
         case NUMBER:
         case STRING:
+        case VARIABLE:
         case 27:
         case 28:{
           b = comparison();
@@ -370,6 +374,7 @@ a = new Char(t.toString());
         case LET:
         case NUMBER:
         case STRING:
+        case VARIABLE:
         case 27:
         case 28:{
           c = comparison();
@@ -397,6 +402,10 @@ a = new IfThenElse(a,b,c);
         a = scope();
         break;
         }
+      case VARIABLE:{
+        a = variable();
+        break;
+        }
       default:
         jj_la1[16] = jj_gen;
         jj_consume_token(-1);
@@ -407,7 +416,8 @@ a = new IfThenElse(a,b,c);
       case IF:
       case LET:
       case NUMBER:
-      case STRING:{
+      case STRING:
+      case VARIABLE:{
         ;
         break;
         }
@@ -417,6 +427,12 @@ a = new IfThenElse(a,b,c);
       }
     }
 {if ("" != null) return a;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public Expression variable() throws ParseException {Token t;
+    t = jj_consume_token(VARIABLE);
+{if ("" != null) return new Variable(t.toString());}
     throw new Error("Missing return statement in function");
   }
 
@@ -436,7 +452,7 @@ a = new IfThenElse(a,b,c);
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x410,0x410,0x180604b0,0x4000,0x2000,0x7e00000,0x7e00000,0x18000000,0x18000000,0x60000000,0x60000000,0x8000000,0x180604a0,0x60020,0x180604b0,0x180604b0,0x604a0,0x604a0,};
+      jj_la1_0 = new int[] {0x410,0x410,0x181604b0,0x4000,0x2000,0x7e00000,0x7e00000,0x18000000,0x18000000,0x60000000,0x60000000,0x8000000,0x181604a0,0x60020,0x181604b0,0x181604b0,0x1604a0,0x1604a0,};
    }
 
   /** Constructor with InputStream. */

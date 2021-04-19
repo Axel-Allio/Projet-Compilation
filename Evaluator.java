@@ -28,6 +28,11 @@ public class Evaluator extends Visitor
         resultString = Double.toString(result);
     }
 
+    void visit(Variable v){
+        scope.getInScope(v.name).accept(this);
+        resultString = Double.toString(result);
+    }
+
     // CALCUL
     void visit(Neg v){
         v.aValue.accept(this);
@@ -38,7 +43,7 @@ public class Evaluator extends Visitor
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
     	    v.lhs.accept(this);
             String temp = resultString.replace("\"","");
-             v.rhs.accept(this);
+            v.rhs.accept(this);
             resultString = "\""+temp + resultString.replace("\"", "") + "\"";
             System.out.println("temp = "+temp+"  result = "+resultString);
     	} 
@@ -57,7 +62,7 @@ public class Evaluator extends Visitor
             v.lhs.accept(this) ;
             Double temp = result;
             v.rhs.accept(this);
-            result = result - temp;
+            result = temp - result;
             resultString = Double.toString(result);   
         }
         else {
