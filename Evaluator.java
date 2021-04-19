@@ -35,7 +35,6 @@ public class Evaluator extends Visitor
              v.rhs.accept(this);
             resultString = "\""+temp + resultString.replace("\"", "") + "\"";
             System.out.println("temp = "+temp+"  result = "+resultString);
-            System.out.println("ca devrait marcher");
     	} 
         else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
             v.lhs.accept(this) ;
@@ -43,7 +42,6 @@ public class Evaluator extends Visitor
             v.rhs.accept(this);
             result += temp;
             resultString = Double.toString(result);
-            System.out.println("tu utilises pas le bon");
         } else
 		    System.out.println("These types can not be operated together.");
         
@@ -132,9 +130,10 @@ public class Evaluator extends Visitor
                 result = 0;
             resultString = Double.toString(result);  
         }
-        else{
+        else
             System.out.println("These types can not be operated together.");
     }
+
     void visit(Inf v){
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			v.lhs.accept(this);
@@ -237,6 +236,7 @@ public class Evaluator extends Visitor
 	}
 
     void visit(IfThenElse v){
+    System.out.println("pp part");
         v.aCondition.accept(this);
         if(result==1){
             v.aThen.accept(this);
