@@ -38,7 +38,7 @@ print(if 1 then "1" else 1)
 print("TEST VARIABLES ET SCOPES")
 let in 1 + 1 end
 let var i := 1 in print(i) end
-let var i := 10 in print(i), let var i := i * i  in print(i) end print(i) end
+let var i := 10 in print(i), let var i := i * i in print(i) end, print(i) end
 let var foo in end
 let var foo := 1 var bar := 1 var foo := 1 in 1 end
 
