@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 public class Jagger
 {
-    public static void main(String args[]) throws ParseException
+    public static void main(String args[]) throws Exception
     {
-        Jagger parser = new Jagger(System.in);
+        Jagger parser = new Jagger(new java.io.FileReader(args[0]));
         parser.mainloop();
     }
 }
@@ -51,7 +51,7 @@ void mainloop():
 { Expression a; }
 {
     (
-      (a=print()|a=comparison()) <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
+      (a=print()|a=comparison()) (<EOL>)* { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
     )*
     <EOF>
 }
