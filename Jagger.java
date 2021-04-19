@@ -23,7 +23,7 @@ public class Jagger implements JaggerConstants {
       }
       a = print();
       jj_consume_token(EOL);
-new PrettyPrinter(e); System.out.println(); new Eval(e); parent=null;
+new PrettyPrinter(a); System.out.println(); new Evaluator(a);
     }
     jj_consume_token(0);
   }
@@ -33,13 +33,14 @@ new PrettyPrinter(e); System.out.println(); new Eval(e); parent=null;
   static final public Expression statement() throws ParseException {Token t; Expression a;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case LRB:
-    case NUMBER:{
+    case NUMBER:
+    case 18:
+    case 19:{
       a = comparison();
       break;
       }
     case PRINT:{
       a = print();
-{if ("" != null) return a;}
       break;
       }
     default:
@@ -47,6 +48,7 @@ new PrettyPrinter(e); System.out.println(); new Eval(e); parent=null;
       jj_consume_token(-1);
       throw new ParseException();
     }
+{if ("" != null) return a;}
     throw new Error("Missing return statement in function");
   }
 
@@ -57,7 +59,7 @@ new PrettyPrinter(e); System.out.println(); new Eval(e); parent=null;
     jj_consume_token(LRB);
     a = comparison();
     jj_consume_token(RRB);
-new Print(a);{if ("" != null) return a;}
+{if ("" != null) return new Print(a);}
     throw new Error("Missing return statement in function");
   }
 
@@ -162,7 +164,7 @@ a=new Sub(a,b);
 // Term.
 // T -> U ('*'U | '/'U)*
   static final public Expression term() throws ParseException {Expression a,b;
-    a = factor();
+    a = unary();
     label_2:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -178,13 +180,13 @@ a=new Sub(a,b);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case 20:{
         jj_consume_token(20);
-        b = factor();
+        b = term();
 a=new Mul(a,b);
         break;
         }
       case 21:{
         jj_consume_token(21);
-        b = factor();
+        b = term();
 a=new Div(a,b);
         break;
         }
@@ -272,7 +274,7 @@ new Num(Double.parseDouble(t.toString()));
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x10,0x230,0x3f000,0x3f000,0xc0000,0xc0000,0x300000,0x300000,0x40000,0xc0220,0x220,};
+      jj_la1_0 = new int[] {0x10,0xc0230,0x3f000,0x3f000,0xc0000,0xc0000,0x300000,0x300000,0x40000,0xc0220,0x220,};
    }
 
   /** Constructor with InputStream. */

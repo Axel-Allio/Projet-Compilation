@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Evaluator extends Visitor
 {
     private double result;
-    private bool resultBool;
     private String resultString;
+    private ArrayList<String> toPrint = new ArrayList<String>();
 
     public Evaluator(Expression e){
         e.accept(this);
@@ -14,55 +16,111 @@ public class Evaluator extends Visitor
         resultString = v.aValue;
     }
     void visit(Num v){
-        resultString = v.aValue.toString();
+        result = v.aValue;
+        resultString = Double.toString(result);
     }
 
     // CALCUL
     void visit(Neg v){
-        result = -v.exp.accept(this);
-        resultString = result.toString;
+        v.aValue.accept(this);
+        result = -result;
+        resultString = Double.toString(result);
     }
     void visit(Add v){
-        result = v.lhs.accept(this) + v.rhs.accept(this);
-        resultString = result.toString;
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        result += temp;
+        resultString = Double.toString(result);
     }
     void visit(Sub v){
-        result = v.lhs.accept(this) - v.rhs.accept(this);
-        resultString = result.toString;
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        result = result - temp;
+        resultString = Double.toString(result);    
     }
     void visit(Mul v){
-        result = v.lhs.accept(this) * v.rhs.accept(this);
-        resultString = result.toString;
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        result = result * temp;
+        resultString = Double.toString(result);
     }
     void visit(Div v){
-        result = v.lhs.accept(this) / v.rhs.accept(this);
-        resultString = result.toString;
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        result = result / temp;
+        resultString = Double.toString(result);
     }
 
     // COMPARISON
     void visit(Equal v){
-        resultBool = v.lhs.accept(this) == v.rhs.accept(this);
-        resultString = resultBool.toString();
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        if (temp == result)
+            result = 1;
+        else
+            result = 0;
+        resultString = Double.toString(result);
     }
     void visit(NonEqual v){
-        resultBool = v.lhs.accept(this) != v.rhs.accept(this)
-        resultString = resultBool.toString();
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        if (temp != result)
+            result = 1;
+        else
+            result = 0;
+        resultString = Double.toString(result);  
     }
     void visit(Inf v){
-        resultBool = v.lhs.accept(this) < v.rhs.accept(this)
-        resultString = resultBool.toString();
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        if (temp < result)
+            result = 1;
+        else
+            result = 0;
+        resultString = Double.toString(result);    
     }
     void visit(Sup v){
-        resultBool = v.lhs.accept(this) > v.rhs.accept(this)
-        resultString = resultBool.toString();
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        if (temp > result)
+            result = 1;
+        else
+            result = 0;
+        resultString = Double.toString(result);
     }
     void visit(SupEqual v){
-        resultBool = v.lhs.accept(this) >= v.rhs.accept(this)
-        resultString = resultBool.toString();
+        v.lhs.accept(this); 
+        Double temp = result;
+        v.rhs.accept(this);
+        if (temp >= result)
+            result = 1;
+        else
+            result = 0;
+        resultString = Double.toString(result);    
     }
     void visit(InfEqual v){
-        resultBool = v.lhs.accept(this) <= v.rhs.accept(this)
-        resultString = resultBool.toString();
+        v.lhs.accept(this) ;
+        Double temp = result;
+        v.rhs.accept(this);
+        if (temp <= result)
+            result = 1;
+        else
+            result = 0;
+        resultString = Double.toString(result);
     }
+
+    public void visit(Print v)
+	{
+		v.aValue.accept(this);
+		toPrint.add(resultString);
+	}
 
 }

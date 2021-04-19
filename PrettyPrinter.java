@@ -1,7 +1,6 @@
 public class PrettyPrinter extends Visitor
 {
      private double result;
-    private bool resultBool;
     private String resultString;
 
     public PrettyPrinter(Expression e){
@@ -20,7 +19,7 @@ public class PrettyPrinter extends Visitor
     // CALCUL
     void visit(Neg v){
         System.out.println("(- ");
-        v.exp.accept(this);
+        v.aValue.accept(this);
         System.out.println(")");
     }
     void visit(Add v){
@@ -68,14 +67,14 @@ public class PrettyPrinter extends Visitor
 		System.out.print(")");
     }
     void visit(Inf v){
-        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
 		} 
-        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" < ");
@@ -86,15 +85,14 @@ public class PrettyPrinter extends Visitor
 		    System.out.println("Incompatible types.");
     }
     void visit(Sup v){
-        resultBool = v.lhs > v.rhs
-        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
 		} 
-        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" > ");
@@ -105,14 +103,14 @@ public class PrettyPrinter extends Visitor
 		    System.out.println("Incompatible types.");
     }
     void visit(SupEqual v){
-        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
 		} 
-        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" >= ");
@@ -123,14 +121,14 @@ public class PrettyPrinter extends Visitor
 		    System.out.println("Incompatible types.");
     }
     void visit(InfEqual v){
-        if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
 		} 
-        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" <= ");
@@ -141,5 +139,9 @@ public class PrettyPrinter extends Visitor
 		    System.out.println("Incompatible types.");
     }
 
-}
+    void visit(Print v){
+        System.out.print("print(");
+		v.aValue.accept(this);
+		System.out.print(")");
+    }
 }

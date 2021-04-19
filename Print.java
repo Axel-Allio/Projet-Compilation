@@ -1,10 +1,10 @@
 public class Print extends Expression
 {
-    public Expression exp;
+    public Expression aValue;
 
 	public Print(Expression a)
 	{
-		exp = a;;
+		aValue = a;;
 	}
 
     public void accept(Visitor v)

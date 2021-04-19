@@ -1,10 +1,10 @@
 public class Neg extends Expression
 {
-    public Expression exp;
+    public Expression aValue;
 
 	public Neg(Expression a)
 	{
-		exp = a;
+		aValue = a;
 	}
 
     public void accept(Visitor v)

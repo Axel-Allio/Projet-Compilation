@@ -1,31 +1,31 @@
 public abstract class Visitor
 {
     ///////TYPES///////
-    abstract void visit(Char n);
-    abstract void visit(Num n);
+    abstract void visit(Char v);
+    abstract void visit(Num v);
 
     ///////CALCULS///////
     //unary
-    abstract void visit(Neg n);
+    abstract void visit(Neg v);
     //binary
-    abstract void visit(Add n);
-    abstract void visit(Sub n);
-    abstract void visit(Mul n);
-    abstract void visit(Div n);
+    abstract void visit(Add v);
+    abstract void visit(Sub v);
+    abstract void visit(Mul v);
+    abstract void visit(Div v);
 
     ///////COMPARISONS///////
-    abstract void visit(Equal n);
-    abstract void visit(NonEqual n);
-    abstract void visit(Inf n);
-    abstract void visit(Sup n);
-    abstract void visit(SupEqual n);
-    abstract void visit(InfEqual n);
+    abstract void visit(Equal v);
+    abstract void visit(NonEqual v);
+    abstract void visit(Inf v);
+    abstract void visit(Sup v);
+    abstract void visit(SupEqual v);
+    abstract void visit(InfEqual v);
 
     ///////KEYWORDS///////
-    abstract void visit(Print n);
-    // abstract void visit(Ins n);
-    //abstract void visit(Variable n);
-    //abstract void visit(Scope n);
-    //abstract void visit(Assignment n);
-    //abstract void visit(Function n);
+    abstract void visit(Print v);
+    // abstract void visit(Ins v);
+    //abstract void visit(Variable v);
+    //abstract void visit(Scope v);
+    //abstract void visit(Assignment v);
+    //abstract void visit(Function v);
 }
