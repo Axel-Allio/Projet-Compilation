@@ -265,6 +265,11 @@ public class Evaluator extends Visitor
         scope = s.parent;
     }
 
+    public void visit(Assignment v)
+	{
+		v.scope.changeValue(v.aName, v.aValue);
+	}
+
     public double getResult(){
         return result;
     }

@@ -61,7 +61,7 @@ public class PrettyPrinter extends Visitor
     void visit(Equal v){
         System.out.print("(");
         v.lhs.accept(this);
-        System.out.print("==");
+        System.out.print("=");
         v.rhs.accept(this);
         System.out.print(")");
     }
@@ -196,4 +196,10 @@ public class PrettyPrinter extends Visitor
 		scope = s.parent;
 	}
 
+    public void visit(Assignment v)
+	{
+		System.out.print(v.aName);
+		System.out.print(" := ");
+		v.aValue.accept(this);
+	}
 }

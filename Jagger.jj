@@ -71,7 +71,8 @@ Expression statement():
 {Token t; Expression a;}
 {
  (a = comparison()
- | a = print())
+ | a = print()
+ | t=<ID> <ASSIGN> a=comparison() { a=new Assignment(t.toString(), a, parent); )
  {return a;}
  }
 
