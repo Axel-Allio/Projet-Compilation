@@ -123,8 +123,8 @@ Expression unary():
 {Expression a;}
 {
     (
-    "-" a=factor() {a=new Neg(a);}
-    | ("+")? a=factor()
+    "-" a=prefactor() {a=new Neg(a);}
+    | ("+")? a=prefactor()
     ){return a;}
 }
 
@@ -140,9 +140,11 @@ Expression factor():
    
 }
 
-Expression ITE():
+Expression prefactor():
 {Expression a,b,c;}
 {
-    (<IF> a=comparison() <THEN> b=comparison() <ELSE> c=comparison() { a = new IfThenElse(a,b,c);})+
+    (<IF> a=comparison() <THEN> b=comparison() <ELSE> c=comparison() { a = new IfThenElse(a,b,c);}
+    |a=factor()
+    )+
     {return a;}
 }
