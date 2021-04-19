@@ -51,7 +51,7 @@ void mainloop():
 { Expression a; }
 {
     (
-      (a=print()|a=comparison()) <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
+      (a=print()|a=ITE()) <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
     )*
     <EOF>
 }

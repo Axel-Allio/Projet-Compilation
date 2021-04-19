@@ -17,11 +17,7 @@ public class Jagger implements JaggerConstants {
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case PRINT:
-      case LRB:
-      case NUMBER:
-      case STRING:
-      case 22:
-      case 23:{
+      case IF:{
         ;
         break;
         }
@@ -34,12 +30,8 @@ public class Jagger implements JaggerConstants {
         a = print();
         break;
         }
-      case LRB:
-      case NUMBER:
-      case STRING:
-      case 22:
-      case 23:{
-        a = comparison();
+      case IF:{
+        a = ITE();
         break;
         }
       default:
@@ -330,7 +322,7 @@ a = new IfThenElse(a,b,c);
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0xc03030,0xc03030,0xc03030,0x3f0000,0x3f0000,0xc00000,0xc00000,0x3000000,0x3000000,0x400000,0xc03020,0x3020,0x80,};
+      jj_la1_0 = new int[] {0x90,0x90,0xc03030,0x3f0000,0x3f0000,0xc00000,0xc00000,0x3000000,0x3000000,0x400000,0xc03020,0x3020,0x80,};
    }
 
   /** Constructor with InputStream. */
