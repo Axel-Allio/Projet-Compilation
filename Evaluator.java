@@ -230,12 +230,20 @@ public class Evaluator extends Visitor
             System.out.println("These types can not be operated together.");
     }
 
-    public void visit(Print v)
+    void visit(Print v)
 	{
 		v.aValue.accept(this);
 		toPrint.add(resultString);
 	}
 
-
+    void visit(IfThenElse v){
+        v.aCondition.accept(this);
+        if(result==1){
+            v.aThen.accept(this);
+        }
+        else{
+            v.aElse.accept(this);
+        }
+    }
 
 }
