@@ -10,8 +10,8 @@ public class Evaluator
     }
 
     // TYPE
-    void visit(Chaine v){
-        
+    void visit(Char v){
+        resultString = v.aValue;
     }
     void visit(Num v){
         resultString = v.aValue.ToString();
