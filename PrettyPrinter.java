@@ -19,23 +19,37 @@ public class PrettyPrinter extends Visitor
 
     // CALCUL
     void visit(Neg v){
-        System.out.println("-" + v.exp.accept(this));
+        System.out.println("(- ");
+        v.exp.accept(this);
+        System.out.println(")");
     }
     void visit(Add v){
-        System.out.println(v.lhs.accept(this) + "+" + v.rhs.accept(this));
-        resultString = result.toString;
+        System.out.println("(");
+        v.lhs.accept(this);
+        System.out.println( "+" );
+        v.rhs.accept(this);
+        System.out.println(")");
     }
     void visit(Sub v){
-        System.out.println(v.lhs.accept(this) + "-" + v.rhs.accept(this));
-        resultString = result.toString;
+        System.out.println("(");
+        v.lhs.accept(this);
+        System.out.println( "-" );
+        v.rhs.accept(this);
+        System.out.println(")");
     }
     void visit(Mul v){
-        System.out.println(v.lhs.accept(this) + "*" + v.rhs.accept(this));
-        resultString = result.toString;
+        System.out.println("(");
+        v.lhs.accept(this);
+        System.out.println( "*" );
+        v.rhs.accept(this);
+        System.out.println(")");
     }
     void visit(Div v){
-        System.out.println(v.lhs.accept(this) + "/" + v.rhs.accept(this));
-        resultString = result.toString;
+        System.out.println("(");
+        v.lhs.accept(this);
+        System.out.println( "/" );
+        v.rhs.accept(this);
+        System.out.println(")");
     }
 
     // COMPARISON
