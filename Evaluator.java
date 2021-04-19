@@ -1,4 +1,4 @@
-public class Evaluator
+public class Evaluator extends Visitor
 {
     private double result;
     private bool resultBool;
@@ -14,7 +14,7 @@ public class Evaluator
         resultString = v.aValue;
     }
     void visit(Num v){
-        resultString = v.aValue.ToString();
+        resultString = v.aValue.toString();
     }
 
     // CALCUL
