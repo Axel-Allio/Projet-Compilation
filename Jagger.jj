@@ -24,23 +24,24 @@ SKIP: { " " | "\r" | "\t" }
 TOKEN:
 {
 
-    <PRINT: "print">                         // Print
-|   <LRB: "(">                                // Left round bracket
-|   <RRB: ")">                                // Right round bracket
+    <PRINT: "print">                                                // Print
+|   <LRB: "(">                                                      // Left round bracket
+|   <RRB: ")">                                                      // Right round bracket
 
 |    <IF: "if">
 |    <THEN: "then">
 |    <ELSE: "else">
 
-|   <ASSIGN: ":=">                           // Assignement
+|   <ASSIGN: ":=">                                                  // Assignement
 
 
 
-|   < EOL: "\n" >                            // End of line.
+|   < EOL: "\n" >                                                   // End of line.
 
 // Type
-|    < NUMBER: (<DIGIT>)+ ("." (<DIGIT>)*)? >  // A decimal number.
-|   < DIGIT: ["0"-"9"] >                      // A decimal digit.
+|    < NUMBER: (<DIGIT>)+ ("." (<DIGIT>)*)? >                       // A decimal number.
+|   < STRING: "\"" ((~["\n", "\r", "\""])*)? "\"" >                 // string
+|   < DIGIT: ["0"-"9"] >                                            // A decimal digit.
 |   < VARIABLE: ["a"-"z", "A"-"Z"](["a"-"z", "A"-"Z","0"-"9"])* >   // Variable
 }
 
@@ -130,11 +131,12 @@ Expression unary():
 // Factor of an expression.
 // F -> <NUMBER> | "(" E ")"
 Expression factor():
-{ Token t; Expression e; }
+{ Token t; Expression a; }
 {
-      (t=<NUMBER> {e = new Num(Double.parseDouble(t.toString())); }
-    | <LRB> e=comparison() <RRB>)
-    { return e; }
+      (t=<NUMBER> {a = new Num(Double.parseDouble(t.toString())); }
+    | t=<STRING> { a = new Char(t.toString()); }
+    | <LRB> a=comparison() <RRB>)
+    { return a; }
    
 }
 
