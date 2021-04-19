@@ -63,12 +63,18 @@ new PrettyPrinter(a); System.out.println(); new Evaluator(a); parent=null;
 //statement → print | comparison
   static final public Expression statement() throws ParseException {Token t; Expression a;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case VARIABLE:{
+      t = jj_consume_token(VARIABLE);
+      jj_consume_token(ASSIGN);
+      a = comparison();
+a=new Assignment(t.toString(), a, parent);
+      break;
+      }
     case LRB:
     case IF:
     case LET:
     case NUMBER:
     case STRING:
-    case VARIABLE:
     case 27:
     case 28:{
       a = comparison();

@@ -1,13 +1,13 @@
 public class Assignment extends Expression
 {
     public String aName;
-    public Exp aValue;
+    public Expression aValue;
     public Scope scope;
 
-	public Assignment(String str, Exp e, Scope s)
+	public Assignment(String str, Expression e, Scope s)
 	{
 		aName = str;
-        aValue = v;
+        aValue = e;
         scope = s;
 	}
 

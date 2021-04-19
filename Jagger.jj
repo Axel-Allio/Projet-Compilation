@@ -70,9 +70,11 @@ void mainloop():
 Expression statement():
 {Token t; Expression a;}
 {
- (a = comparison()
+ (
+  t=<VARIABLE> <ASSIGN> a=comparison() { a=new Assignment(t.toString(), a, parent);} 
+ | a = comparison()
  | a = print()
- | t=<ID> <ASSIGN> a=comparison() { a=new Assignment(t.toString(), a, parent); )
+ )
  {return a;}
  }
 
