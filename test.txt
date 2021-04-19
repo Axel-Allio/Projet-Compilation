@@ -1,1 +1,1 @@
-let var i:=2 in let var v:=3 in i:=i+v,print(i) end, print(i) end
+let var i:=2 in i:=i,print(i) end

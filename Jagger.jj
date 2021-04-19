@@ -22,7 +22,7 @@ PARSER_END(Jagger)
 // Characters to ignore.
 SKIP: { " " | "\r" | "\t" }
 
-// Token specifications.
+////////////////// Token specifications //////////////////
 TOKEN:
 {
 
@@ -47,15 +47,14 @@ TOKEN:
 
 |   < EOL: "\n" >                                                   // End of line.
 
-// Type
 |    < NUMBER: (<DIGIT>)+ ("." (<DIGIT>)*)? >                       // A decimal number.
 |   < STRING: "\"" ((~["\n", "\r", "\""])*)? "\"" >                 // string
 |   < DIGIT: ["0"-"9"] >                                            // A decimal digit.
 |   < VARIABLE: ["a"-"z", "A"-"Z"](["a"-"z", "A"-"Z","0"-"9"])* >   // Variable
 }
 
-// Main lopp: read expressions on a line until end of file.
-//     mainloop → (expression | scope)* <EOF>
+////////////////// Main lopp: read expressions on a line until end of file. //////////////////
+//     mainloop -> (expression | scope)* <EOF>
 void mainloop():
 { Expression a; }
 {
@@ -65,8 +64,8 @@ void mainloop():
     <EOF>
 }
 
-//Statement
-//statement → print | comparison
+////////////////// Statement //////////////////
+//statement -> print | comparison
 Expression statement():
 {Token t; Expression a;}
 {
@@ -77,6 +76,7 @@ Expression statement():
  {return a;}
  }
 
+ ////////////////// Scope //////////////////
  //  scope -> let (declaration)* in instruction (, instruction)* end
 Expression scope():
 { Expression a; Scope s = new Scope(parent); parent=s; }
@@ -89,6 +89,7 @@ Expression scope():
     { return s; }
 }
 
+////////////////// Declaration //////////////////
 //  declaration -> (var <VARIABLE> := comparison)*
 void declaration():
 { Token t; Expression a; }
@@ -104,7 +105,7 @@ Expression print():
     <PRINT><LRB> a = comparison() <RRB> {return new Print(a);}
 }
 
-// Comparison operators.
+////////////////// Comparison //////////////////
 // C -> E ('=='E | '<>'E | '>'E | '<'E | '>='E | '<='E)*
 Expression comparison():
 { Expression a,b; }
@@ -122,7 +123,7 @@ Expression comparison():
     { return a; }
 }
 
-// Expression (the axiom).
+////////////////// Expression //////////////////
 // E -> T ('+'T | '-'T)*
 Expression expression():
 { Expression a,b; }
@@ -134,7 +135,7 @@ Expression expression():
     )? { return a; }
 }
 
-// Term.
+////////////////// Term //////////////////
 // T -> U ('*'U | '/'U)*
 Expression term():
 { Expression a,b; }
@@ -147,7 +148,7 @@ Expression term():
 }
 
 
-//Unary expression
+//////////////////Unary expression//////////////////
 // U -> "-" F | ("+")?F
 Expression unary():
 {Expression a;}
@@ -158,7 +159,7 @@ Expression unary():
     ){return a;}
 }
 
-// Factor of an expression.
+////////////////// Factor //////////////////
 // F -> <NUMBER> | "(" E ")"
 Expression factor():
 { Token t; Expression a; }
@@ -170,10 +171,12 @@ Expression factor():
    
 }
 
+////////////////// Prefactor //////////////////
+// P -> (<IF> C <THEN> C <ELSE> C)|F|S|V)+
 Expression prefactor():
 {Expression a,b,c;}
 {
-    (<IF> a=comparison() <THEN> (b=comparison()|b=print()) <ELSE> (c=comparison()|c=print()) { a = new IfThenElse(a,b,c);}
+    (<IF> a=comparison() <THEN> b=comparison() <ELSE> c=comparison() { a = new IfThenElse(a,b,c);}
     |a=factor()
     |a=scope()
     |a=variable()
@@ -181,6 +184,8 @@ Expression prefactor():
     {return a;}
 }
 
+////////////////// Variable //////////////////
+//V -> <VARIABLE>
 Expression variable():
 { Token t; }
 {
