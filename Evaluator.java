@@ -1,8 +1,14 @@
 public class Visitor
 {
+    private double result;
+    private String resultString;
+
+
     // TYPE
     void visit(Chaine n);
-    void visit(Num n);
+    void visit(Num n){
+        
+    }
 
     // CALCUL
     void visit(Neg n);
