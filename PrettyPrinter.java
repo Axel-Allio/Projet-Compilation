@@ -19,23 +19,22 @@ public class PrettyPrinter extends Visitor
 
     // CALCUL
     void visit(Neg v){
-        result = -v.exp;
-        resultString = result.toString;
+        System.out.println("-" + v.exp.accept(this));
     }
     void visit(Add v){
-        result = v.lhs + v.rhs;
+        System.out.println(v.lhs.accept(this) + "+" + v.rhs.accept(this));
         resultString = result.toString;
     }
     void visit(Sub v){
-        result = v.lhs - v.rhs;
+        System.out.println(v.lhs.accept(this) + "-" + v.rhs.accept(this));
         resultString = result.toString;
     }
     void visit(Mul v){
-        result = v.lhs * v.rhs;
+        System.out.println(v.lhs.accept(this) + "*" + v.rhs.accept(this));
         resultString = result.toString;
     }
     void visit(Div v){
-        result = v.lhs / v.rhs;
+        System.out.println(v.lhs.accept(this) + "/" + v.rhs.accept(this));
         resultString = result.toString;
     }
 
