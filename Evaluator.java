@@ -266,7 +266,7 @@ public class Evaluator extends Visitor
     }
 
     public double getResult(){
-        return result;
+        return this.result;
     }
 
 

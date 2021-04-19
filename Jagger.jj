@@ -9,8 +9,9 @@ import java.util.HashMap;
 
 public class Jagger
 {
-    public static void main(String args[]) throws Exception
     static Scope parent = null;
+
+    public static void main(String args[]) throws Exception
     {
         Jagger parser = new Jagger(new java.io.FileReader(args[0]));
         parser.mainloop();
