@@ -37,31 +37,43 @@ void mainloop():
 
 // Expression (the axiom).
 // E -> T ('+'T | '-'T)*
-double expression():
-{ double a,b; }
+Expression expression():
+{ Expression a,b; }
 {
     a=term()
     (
-      "+" b=expression() { a += b; }
-    | "-" b=expression() { a -= b; }
+      "+" b=expression() { new Add(a,b); }
+    | "-" b=expression() { new Sub(a,b); }
     )? { return a; }
 }
 
 // Term.
-// T -> F ('*'F | '/'F)*
-double term():
-{ double a,b; }
+// T -> U ('*'U | '/'U)*
+Expression term():
+{ Expression a,b; }
 {
     a=factor()
     (
-      "*" b=factor() { a *= b; }
-    | "/" b=factor() { a /= b; }
+      "*" b=factor() { new Mult(a,b); }
+    | "/" b=factor() { new Div(a,b) }
     )* { return a; }
+}
+
+
+//Unary expression
+// U -> "-" F | ("+")?F
+Expression unary():
+{Expression a}
+{
+    (
+    "-" factor() {new Negative(a);}
+    | ("+")? factor()
+    ){return a;}
 }
 
 // Factor of an expression.
 // F -> <NUMBER> | "(" E ")"
-double factor():
+Expression factor():
 { Token t; double e; }
 {
       t=<NUMBER> { return Double.parseDouble(t.toString()); }
