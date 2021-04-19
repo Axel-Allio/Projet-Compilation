@@ -24,10 +24,13 @@ SKIP: { " " | "\r" | "\t" }
 TOKEN:
 {
 
-   <PRINT: "print">                         // Print
+    <PRINT: "print">                         // Print
 |   <LRB: "(">                                // Left round bracket
 |   <RRB: ")">                                // Right round bracket
 
+|    <IF: "if">
+|    <THEN: "then">
+|    <ELSE: "else">
 
 |   <ASSIGN: ":=">                           // Assignement
 
@@ -47,7 +50,7 @@ void mainloop():
 { Expression a; }
 {
     (
-      a=print() <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
+      a=ITE() <EOL> { new PrettyPrinter(a); System.out.println(); new Evaluator(a);}
     )*
     <EOF>
 }
@@ -133,4 +136,11 @@ Expression factor():
     | <LRB> e=comparison() <RRB>)
     { return e; }
    
+}
+
+Expression ITE():
+{Expression a,b,c;}
+{
+    (<IF> a=comparison() <THEN> b=expression() <ELSE> c=expression() { a = new IfThenElse(a,b,c);})+
+    {return a;}
 }

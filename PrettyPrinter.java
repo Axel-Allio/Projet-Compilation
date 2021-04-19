@@ -144,4 +144,14 @@ public class PrettyPrinter extends Visitor
 		v.aValue.accept(this);
 		System.out.print(")");
     }
+
+    void visit(IfThenElse v){
+        System.out.print("if ");
+	    v.aCondition.accept(this);
+		System.out.print(" then\n");
+		v.aThen.accept(this);
+		System.out.print("\nelse\n");
+		v.aElse.accept(this);
+		System.out.print("\n");
+    }
 }

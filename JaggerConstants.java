@@ -15,15 +15,21 @@ public interface JaggerConstants {
   /** RegularExpression Id. */
   int RRB = 6;
   /** RegularExpression Id. */
-  int ASSIGN = 7;
+  int IF = 7;
   /** RegularExpression Id. */
-  int EOL = 8;
+  int THEN = 8;
   /** RegularExpression Id. */
-  int NUMBER = 9;
+  int ELSE = 9;
   /** RegularExpression Id. */
-  int DIGIT = 10;
+  int ASSIGN = 10;
   /** RegularExpression Id. */
-  int VARIABLE = 11;
+  int EOL = 11;
+  /** RegularExpression Id. */
+  int NUMBER = 12;
+  /** RegularExpression Id. */
+  int DIGIT = 13;
+  /** RegularExpression Id. */
+  int VARIABLE = 14;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -37,6 +43,9 @@ public interface JaggerConstants {
     "\"print\"",
     "\"(\"",
     "\")\"",
+    "\"if\"",
+    "\"then\"",
+    "\"else\"",
     "\":=\"",
     "\"\\n\"",
     "<NUMBER>",
