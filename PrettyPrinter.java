@@ -74,14 +74,16 @@ public class PrettyPrinter extends Visitor
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
-		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+		} 
+        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" < ");
 			v.rhs.accept(this);
 			System.out.print(")");
-		} else
-		System.out.println("Incompatible types.");
+		} 
+        else
+		    System.out.println("Incompatible types.");
     }
     void visit(Sup v){
         resultBool = v.lhs > v.rhs
@@ -91,14 +93,16 @@ public class PrettyPrinter extends Visitor
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
-		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+		} 
+        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" > ");
 			v.rhs.accept(this);
 			System.out.print(")");
-		} else
-		System.out.println("Incompatible types.");
+		} 
+        else
+		    System.out.println("Incompatible types.");
     }
     void visit(SupEqual v){
         if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
@@ -107,14 +111,16 @@ public class PrettyPrinter extends Visitor
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
-		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+		} 
+        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" >= ");
 			v.rhs.accept(this);
 			System.out.print(")");
-		} else
-		System.out.println("Incompatible types.");
+		} 
+        else
+		    System.out.println("Incompatible types.");
     }
     void visit(InfEqual v){
         if(v.lhs instanceof Chaine && v.rhs instanceof Chaine) {
@@ -123,14 +129,16 @@ public class PrettyPrinter extends Visitor
 			System.out.print(".Length < ");
 			v.rhs.accept(this);
 			System.out.print(".Length)");
-		} else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
+		} 
+        else if(!(v.lhs instanceof Chaine) && !(v.rhs instanceof Chaine)) {
 			System.out.print("(");
 			v.lhs.accept(this);
 			System.out.print(" <= ");
 			v.rhs.accept(this);
 			System.out.print(")");
-		} else
-		System.out.println("Incompatible types.");
+		} 
+        else
+		    System.out.println("Incompatible types.");
     }
 
 }
