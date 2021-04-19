@@ -31,101 +31,203 @@ public class Evaluator extends Visitor
     void visit(Add v){
         if(v.lhs instanceof Char && v.rhs instanceof Char) {
     	    v.lhs.accept(this);
-    	    //String temp = sRes.replace("\"", "");
-            String temp = resultString;
-    	    v.rhs.accept(this);
-    	    resultString = temp + resultString;
+            String temp = resultString.replace("\"","");
+             v.rhs.accept(this);
+            resultString = "\""+temp + resultString.replace("\"", "") + "\"";
+            System.out.println("temp = "+temp+"  result = "+resultString);
+            System.out.println("ca devrait marcher");
     	} 
         else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
             v.lhs.accept(this) ;
             Double temp = result;
             v.rhs.accept(this);
             result += temp;
-            }
-        resultString = Double.toString(result);
+            resultString = Double.toString(result);
+            System.out.println("tu utilises pas le bon");
+        } else
+		    System.out.println("These types can not be operated together.");
+        
     }
     void visit(Sub v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        result = result - temp;
-        resultString = Double.toString(result);    
+        if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            result = result - temp;
+            resultString = Double.toString(result);   
+        }
+        else {
+			result = 0;
+			System.out.println("These types can not be operated together.");
+		}
     }
     void visit(Mul v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        result = result * temp;
-        resultString = Double.toString(result);
+        if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            result = result * temp;
+            resultString = Double.toString(result);
+        }
+        else {
+			result = 0;
+			System.out.println("These types can not be operated together.");
+		}
     }
     void visit(Div v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        result = result / temp;
-        resultString = Double.toString(result);
+        if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            result = result / temp;
+            resultString = Double.toString(result);
+        }
+        else {
+			result = 0;
+			System.out.println("These types can not be operated together.");
+		}
     }
 
     // COMPARISON
     void visit(Equal v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        if (temp == result)
-            result = 1;
-        else
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+			v.lhs.accept(this);
+			double temp = resultString.length();
+			v.rhs.accept(this);
+			if(temp == resultString.length())
+				resultString = "1";
+			else
+				resultString = "0";
+		} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            if (temp == result)
+                result = 1;
+            else
             result = 0;
-        resultString = Double.toString(result);
+            resultString = Double.toString(result);
+        }
+        else
+            System.out.println("These types can not be operated together.");
     }
     void visit(NonEqual v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        if (temp != result)
-            result = 1;
-        else
-            result = 0;
-        resultString = Double.toString(result);  
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+			v.lhs.accept(this);
+			double temp = resultString.length();
+			v.rhs.accept(this);
+			if(temp != resultString.length())
+				resultString = "1";
+			else
+				resultString = "0";
+		} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            if (temp != result)
+                result = 1;
+            else
+                result = 0;
+            resultString = Double.toString(result);  
+        }
+        else{
+            System.out.println("These types can not be operated together.");
     }
     void visit(Inf v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        if (temp < result)
-            result = 1;
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+			v.lhs.accept(this);
+			double temp = resultString.length();
+			v.rhs.accept(this);
+			if(temp < resultString.length())
+				resultString = "1";
+			else
+				resultString = "0";
+		} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            if (temp < result)
+                result = 1;
+            else
+                result = 0;
+            resultString = Double.toString(result);   
+        }
         else
-            result = 0;
-        resultString = Double.toString(result);    
+            System.out.println("These types can not be operated together.");
     }
+
     void visit(Sup v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        if (temp > result)
-            result = 1;
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+			v.lhs.accept(this);
+			double temp = resultString.length();
+			v.rhs.accept(this);
+			if(temp > resultString.length())
+				resultString = "1";
+			else
+				resultString = "0";
+		} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            if (temp > result)
+                result = 1;
+            else
+                result = 0;
+            resultString = Double.toString(result);
+        }
         else
-            result = 0;
-        resultString = Double.toString(result);
+            System.out.println("These types can not be operated together.");
     }
     void visit(SupEqual v){
-        v.lhs.accept(this); 
-        Double temp = result;
-        v.rhs.accept(this);
-        if (temp >= result)
-            result = 1;
-        else
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+			v.lhs.accept(this);
+			double temp = resultString.length();
+			v.rhs.accept(this);
+			if(temp >= resultString.length())
+				resultString = "1";
+			else
+				resultString = "0";
+		} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this); 
+            Double temp = result;
+            v.rhs.accept(this);
+            if (temp >= result)
+                result = 1;
+            else
             result = 0;
-        resultString = Double.toString(result);    
+            resultString = Double.toString(result);  
+        }
+        else
+            System.out.println("These types can not be operated together.");
+
     }
     void visit(InfEqual v){
-        v.lhs.accept(this) ;
-        Double temp = result;
-        v.rhs.accept(this);
-        if (temp <= result)
-            result = 1;
+        if(v.lhs instanceof Char && v.rhs instanceof Char) {
+			v.lhs.accept(this);
+			double temp = resultString.length();
+			v.rhs.accept(this);
+			if(temp <= resultString.length())
+				resultString = "1";
+			else
+				resultString = "0";
+		} 
+        else if(!(v.lhs instanceof Char) && !(v.rhs instanceof Char)) {
+            v.lhs.accept(this) ;
+            Double temp = result;
+            v.rhs.accept(this);
+            if (temp <= result)
+                result = 1;
+            else
+                result = 0;
+            resultString = Double.toString(result);
+        }
         else
-            result = 0;
-        resultString = Double.toString(result);
+            System.out.println("These types can not be operated together.");
     }
 
     void visit(Print v)
