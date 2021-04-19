@@ -23,28 +23,28 @@ public class Evaluator
     void visit(Div v);
 
     // COMPARISON
-    void visit(Equal n){
-        resultBool = n.lhs == n.rhs;
+    void visit(Equal v){
+        resultBool = v.lhs == v.rhs;
         resultString = resultBool.toString();
     }
-    void visit(NonEqual n){
-        resultBool = n.lhs != n.rhs
+    void visit(NonEqual v){
+        resultBool = v.lhs != v.rhs
         resultString = resultBool.toString();
     }
-    void visit(Inf n){
-        resultBool = n.lhs < n.rhs
+    void visit(Inf v){
+        resultBool = v.lhs < v.rhs
         resultString = resultBool.toString();
     }
-    void visit(Sup n){
-        resultBool = n.lhs > n.rhs
+    void visit(Sup v){
+        resultBool = v.lhs > v.rhs
         resultString = resultBool.toString();
     }
-    void visit(SupEqual n){
-        resultBool = n.lhs >= n.rhs
+    void visit(SupEqual v){
+        resultBool = v.lhs >= v.rhs
         resultString = resultBool.toString();
     }
-    void visit(InfEqual n){
-        resultBool = n.lhs <= n.rhs
+    void visit(InfEqual v){
+        resultBool = v.lhs <= v.rhs
         resultString = resultBool.toString();
     }
 
